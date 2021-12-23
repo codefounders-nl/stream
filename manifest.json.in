@@ -1,0 +1,15 @@
+{
+    "name": "stream.slft",
+    "description": "Stream music from everywhere",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Stream",
+    "hooks": {
+        "stream": {
+            "apparmor": "stream.apparmor",
+            "desktop":  "stream.desktop"
+        }
+    },
+    "version": "@BUILD_VERSION@",
+    "maintainer": "CodeFounders <info@codefounders.nl>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
