@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>Main.qml</file>
+        <file>TestModel.qml</file>
+        <file>PlaylistItem.qml</file>
+        <file>BottomMenu.qml</file>
+        <file>PlayerPage.qml</file>
+        <file>tmp/dathebjijgedaan.jpg</file>
+        <file>tmp/doittoit.jpg</file>
+        <file>tmp/easyonme.jpg</file>
+        <file>tmp/hartosaygoodbye.jpg</file>
+        <file>tmp/heatwaves.jpg</file>
+        <file>tmp/myuniverse.jpg</file>
     </qresource>
 </RCC>

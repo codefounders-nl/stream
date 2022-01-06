@@ -15,43 +15,50 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
+    Component.onCompleted: mainStack.push(mainPage)
+
+    PageStack {
+        id: mainStack
+
+        anchors.fill: parent
+    }
+
     Page {
+        id: mainPage
+
         anchors.fill: parent
 
         header: PageHeader {
-            id: header
-            title: i18n.tr('Stream')
-        }
-
-        ColumnLayout {
-            spacing: units.gu(2)
+                    id: header
+                    title: i18n.tr('Stream')
+                }
+                
+        ListView {
             anchors {
-                margins: units.gu(2)
-                top: header.bottom
-                left: parent.left
-                right: parent.right
+                fill: parent
+                topMargin: header.height
+                bottomMargin: bottomMenu.height
+            }
+            
+            model: TestModel {}
+            delegate: PlaylistItem {}
+
+            clip: true
+        }
+
+        BottomMenu {
+            id: bottomMenu
+
+            anchors {
                 bottom: parent.bottom
-            }
-
-            Item {
-                Layout.fillHeight: true
-            }
-
-            Label {
-                id: label
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr('Press the button below and check the logs!')
-            }
-
-            Button {
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr('Press here!')
-                onClicked: Example.speak()
-            }
-
-            Item {
-                Layout.fillHeight: true
+                horizontalCenter: parent.horizontalCenter
             }
         }
+    }
+
+    PlayerPage {
+        id: playerPage
+
+        visible: false
     }
 }
