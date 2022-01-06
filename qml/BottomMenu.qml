@@ -45,6 +45,7 @@ Rectangle {
 
     UbuntuShape {
         id: albumartShape
+
         height: units.gu(7)
         width: height
 
@@ -79,33 +80,30 @@ Rectangle {
 
             width: parent.width - albumartShape.width
 
-            font.bold: true
-
-            maximumLineCount: 1
-
-            elide: Text.ElideRight
-
             anchors {
                 left: parent.left
                 top: parent.top
             }
+
+            font.bold: true
+            maximumLineCount: 1
+            elide: Text.ElideRight
 
             text: "Dat heb jij gedaan" // TEMPORARY TITLE FOR DEMONSTRATION PURPOSES
         }
 
         Label {
             id: artistText
-
+            
             width: parent.width - albumartShape.width
-
-            maximumLineCount: 1
-
-            elide: Text.ElideRight
 
             anchors {
                 left: parent.left
                 bottom: parent.bottom
             }
+
+            maximumLineCount: 1
+            elide: Text.ElideRight
 
             text: "Meau" // TEMPORARY ARTIST FOR DEMONSTRATION PURPOSES
         }

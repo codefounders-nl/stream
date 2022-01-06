@@ -39,6 +39,7 @@ Page {
 
         Column {
             id: controls
+
             width: parent.width - units.gu(4)
 
             anchors.centerIn: parent
@@ -53,26 +54,23 @@ Page {
 
                 Label {
                     id: trackInfoTitle
+                    
+                    anchors.horizontalCenter: parent.horizontalCenter
                                         
                     font.bold: true
-                    
                     maximumLineCount: 1
-                    
                     elide: Text.ElideRight
-
-                    anchors.horizontalCenter: parent.horizontalCenter
                     
                     text: "Dat heb jij gedaan" // TEMPORARY TITLE FOR DEMONSTRATION PURPOSES
                 }
 
                 Label {
                     id: trackInfoArtist
+                    
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     maximumLineCount: 1
-
                     elide: Text.ElideRight
-
-                    anchors.horizontalCenter: parent.horizontalCenter
 
                     text: "Meau" // TEMPORARY ARTIST FOR DEMONSTRATION PURPOSES
                 }

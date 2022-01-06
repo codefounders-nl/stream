@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Main.qml</file>
-        <file>TestModel.qml</file>
+        <file>SubsonicListModel.qml</file>
         <file>PlaylistItem.qml</file>
         <file>BottomMenu.qml</file>
         <file>PlayerPage.qml</file>

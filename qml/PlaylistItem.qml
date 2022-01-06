@@ -2,56 +2,54 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 
 ListItem {
-        id: playlistItem
+    id: playlistItem
 
-        height: units.gu(9)
+    height: units.gu(9)
 
-        UbuntuShape {
-            id: albumartShape
-            height: units.gu(7)
-            width: height
+    UbuntuShape {
+        id: albumartShape
+        
+        height: units.gu(7)
+        width: height
 
-            anchors {
-                left: parent.left
-                leftMargin: units.gu(2)
-                verticalCenter: parent.verticalCenter
-            }
-
-            // Put album art in UbuntuShape
-            source: Image {
-                        source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
-                    }
-
-            aspect: UbuntuShape.Inset
+        anchors {
+            left: parent.left
+            leftMargin: units.gu(2)
+            verticalCenter: parent.verticalCenter
         }
 
-        // Put labels in a 'box'
+        // Put album art in UbuntuShape
+        source: Image {
+                    source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
+                }
 
-        Item {
-            width: parent.width - units.gu(12)
-            height: units.gu(4.5)
+        aspect: UbuntuShape.Inset
+    }
 
-            anchors {
-                left: albumartShape.right
-                leftMargin: units.gu(1)
-                verticalCenter: parent.verticalCenter
-            }
+    // Put labels in a 'box'
+    Item {
+        width: parent.width - units.gu(12)
+        height: units.gu(4.5)
+
+        anchors {
+            left: albumartShape.right
+            leftMargin: units.gu(1)
+            verticalCenter: parent.verticalCenter
+        }
 
         Label {
             id: titleText
 
             width: parent.width - albumartShape.width
 
-            font.bold: true
-
-            maximumLineCount: 1
-
-            elide: Text.ElideRight
-
             anchors {
                 left: parent.left
                 top: parent.top
             }
+
+            font.bold: true
+            maximumLineCount: 1
+            elide: Text.ElideRight
 
             text: title
         }
@@ -61,14 +59,13 @@ ListItem {
 
             width: parent.width - albumartShape.width
 
-            maximumLineCount: 1
-
-            elide: Text.ElideRight
-
             anchors {
                 left: parent.left
                 bottom: parent.bottom
             }
+
+            maximumLineCount: 1
+            elide: Text.ElideRight
 
             text: artist
         }
