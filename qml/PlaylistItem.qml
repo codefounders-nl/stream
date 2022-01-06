@@ -6,9 +6,12 @@ ListItem {
 
     height: units.gu(9)
 
+    onClicked: songSelected(artist, title, albumartImage.source)
+    signal songSelected(string artist, string title, string albumart)
+
     UbuntuShape {
         id: albumartShape
-        
+
         height: units.gu(7)
         width: height
 
@@ -20,6 +23,8 @@ ListItem {
 
         // Put album art in UbuntuShape
         source: Image {
+                    id: albumartImage
+
                     source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
                 }
 

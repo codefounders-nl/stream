@@ -41,7 +41,14 @@ MainView {
             }
             
             model: SubsonicListModel {}
-            delegate: PlaylistItem {}
+            delegate: PlaylistItem {
+                        onSongSelected: {
+                            playerPage.title = title
+                            playerPage.artist = artist
+                            playerPage.albumart = albumart
+                            playerPage.player.source = "http://demo.subsonic.org/rest/stream?u=guest&p=guest&v=1.13&c=api-test&id=" + source
+                        }
+                      }
 
             clip: true
         }
@@ -53,12 +60,16 @@ MainView {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
+
+            title: playerPage.title
+            artist: playerPage.artist
+            albumart: playerPage.albumart
         }
     }
 
     PlayerPage {
         id: playerPage
-
+        
         visible: false
     }
 }

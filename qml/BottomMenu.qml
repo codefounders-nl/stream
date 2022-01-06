@@ -7,6 +7,10 @@ Rectangle {
 
     color: theme.palette.normal.background
 
+    property string title
+    property string artist
+    property string albumart
+
     MouseArea {
         anchors.fill: parent
 
@@ -57,7 +61,7 @@ Rectangle {
 
         // Put album art in UbuntuShape
         source: Image {
-                    source: "tmp/dathebjijgedaan.jpg" // TEMPORARY SOURCE FOR DEMONSTRATION PURPOSES
+                    source: albumart
                 }
 
         aspect: UbuntuShape.Inset
@@ -89,7 +93,7 @@ Rectangle {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: "Dat heb jij gedaan" // TEMPORARY TITLE FOR DEMONSTRATION PURPOSES
+            text: title
         }
 
         Label {
@@ -105,7 +109,7 @@ Rectangle {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: "Meau" // TEMPORARY ARTIST FOR DEMONSTRATION PURPOSES
+            text: artist
         }
 
         Icon {
