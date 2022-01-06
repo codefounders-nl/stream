@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stream.slft\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-23 20:17+0000\n"
+"POT-Creation-Date: 2022-01-06 19:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:23 stream.desktop.in.h:1
+#: ../qml/Main.qml:33 stream.desktop.in.h:1
 msgid "Stream"
 msgstr ""
 
-#: ../qml/Main.qml:43
-msgid "Press the button below and check the logs!"
-msgstr ""
-
-#: ../qml/Main.qml:48
-msgid "Press here!"
+#: ../qml/PlayerPage.qml:13
+msgid "Now playing"
 msgstr ""
