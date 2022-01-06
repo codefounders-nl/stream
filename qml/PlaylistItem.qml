@@ -19,7 +19,7 @@ ListItem {
 
             // Put album art in UbuntuShape
             source: Image {
-                        source: albumart
+                        source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
                     }
 
             aspect: UbuntuShape.Inset
@@ -81,7 +81,7 @@ ListItem {
                 verticalCenter: parent.verticalCenter
             }
 
-            text: duration
+            text: Math.floor(duration / 60) + ":" + duration % 60
         }
     }
 }
