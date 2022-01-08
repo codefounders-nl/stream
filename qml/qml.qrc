@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>Main.qml</file>
+        <file>SubsonicProvider.qml</file>
+        <file>SubsonicClient.qml</file>
         <file>SubsonicListModel.qml</file>
         <file>PlaylistItem.qml</file>
         <file>BottomMenu.qml</file>

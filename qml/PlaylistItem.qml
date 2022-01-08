@@ -5,9 +5,11 @@ ListItem {
     id: playlistItem
 
     height: units.gu(9)
+    
+    property var client
+    signal songSelected(string artist, string title, string albumart, string source)
 
-    onClicked: songSelected(artist, title, albumartImage.source)
-    signal songSelected(string artist, string title, string albumart)
+    onClicked: songSelected(artist, title, client.getCoverArt(albumart), client.getStreamSource(source))
 
     UbuntuShape {
         id: albumartShape
@@ -25,7 +27,7 @@ ListItem {
         source: Image {
                     id: albumartImage
 
-                    source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
+                    source: client.getCoverArt(albumart)
                 }
 
         aspect: UbuntuShape.Inset

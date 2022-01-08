@@ -22,6 +22,12 @@ MainView {
         anchors.fill: parent
     }
 
+    SubsonicProvider {
+        id: provider
+    }
+
+    property var client : provider.client
+
     Page {
         id: mainPage
 
@@ -40,13 +46,14 @@ MainView {
                 bottomMargin: bottomMenu.height
             }
             
-            model: SubsonicListModel {}
+            model: provider.model
             delegate: PlaylistItem {
+                        client: provider.client
                         onSongSelected: {
                             playerPage.title = title
                             playerPage.artist = artist
                             playerPage.albumart = albumart
-                            playerPage.player.source = "http://demo.subsonic.org/rest/stream?u=guest&p=guest&v=1.13&c=api-test&id=" + source
+                            playerPage.player.source = source
                         }
                       }
 
