@@ -22,6 +22,12 @@ MainView {
         anchors.fill: parent
     }
 
+    SubsonicProvider {
+        id: provider
+    }
+
+    property var client : provider.client
+
     Page {
         id: mainPage
 
@@ -40,8 +46,16 @@ MainView {
                 bottomMargin: bottomMenu.height
             }
             
-            model: SubsonicListModel {}
-            delegate: PlaylistItem {}
+            model: provider.model
+            delegate: PlaylistItem {
+                        client: provider.client
+                        onSongSelected: {
+                            playerPage.title = title
+                            playerPage.artist = artist
+                            playerPage.albumart = albumart
+                            playerPage.player.source = source
+                        }
+                      }
 
             clip: true
         }
@@ -53,12 +67,16 @@ MainView {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }
+
+            title: playerPage.title
+            artist: playerPage.artist
+            albumart: playerPage.albumart
         }
     }
 
     PlayerPage {
         id: playerPage
-
+        
         visible: false
     }
 }

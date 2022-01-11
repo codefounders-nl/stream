@@ -5,10 +5,15 @@ ListItem {
     id: playlistItem
 
     height: units.gu(9)
+    
+    property var client
+    signal songSelected(string artist, string title, string albumart, string source)
+
+    onClicked: songSelected(artist, title, client.getCoverArt(albumart), client.getStreamSource(source))
 
     UbuntuShape {
         id: albumartShape
-        
+
         height: units.gu(7)
         width: height
 
@@ -20,7 +25,9 @@ ListItem {
 
         // Put album art in UbuntuShape
         source: Image {
-                    source: "http://demo.subsonic.org/rest/getCoverArt?u=guest&p=guest&v=1.13&c=api-test&id=" + albumart
+                    id: albumartImage
+
+                    source: client.getCoverArt(albumart)
                 }
 
         aspect: UbuntuShape.Inset

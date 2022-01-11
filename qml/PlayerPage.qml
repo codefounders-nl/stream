@@ -1,17 +1,26 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
-//import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtMultimedia 5.4
 
 Page {
     id: playerPage
 
     anchors.fill: parent
 
+    property string title
+    property string artist
+    property string albumart
+    property alias player: player
+
     header: PageHeader {
                 id: playerPageHeader
                 title: i18n.tr('Now playing')
             }
+
+    Audio {
+        id: player
+    }
     
     Image {
         id: fullAlbumArt
@@ -24,7 +33,7 @@ Page {
             top: playerPageHeader.bottom
         }
 
-        source: "tmp/dathebjijgedaan.jpg" // TEMPORARY SOURCE FOR DEMONSTRATION PURPOSES
+        source: albumart
     }
 
     Item {
@@ -61,7 +70,7 @@ Page {
                     maximumLineCount: 1
                     elide: Text.ElideRight
                     
-                    text: "Dat heb jij gedaan" // TEMPORARY TITLE FOR DEMONSTRATION PURPOSES
+                    text: title
                 }
 
                 Label {
@@ -72,7 +81,7 @@ Page {
                     maximumLineCount: 1
                     elide: Text.ElideRight
 
-                    text: "Meau" // TEMPORARY ARTIST FOR DEMONSTRATION PURPOSES
+                    text: artist
                 }
             }
             
@@ -131,7 +140,7 @@ Page {
 
                     name: "media-playlist-repeat"
                 }
-
+                
                 Icon {
                     id: previousButton
 
@@ -143,15 +152,31 @@ Page {
                     name: "media-skip-backward"
                 }
 
-                Icon {
-                    id: playPauseButton
+                MouseArea {
+                    anchors.verticalCenter: parent.verticalCenter
 
                     height: units.gu(5)
                     width: units.gu(5)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    onClicked: {
+                        if (player.playbackState == true) {
+                            player.pause()
+                        }
+                        else {
+                            player.play()
+                        }
+                    }
 
-                    name: "media-playback-pause"
+                    Icon {
+                        id: playPauseButton
+
+                        height: units.gu(5)
+                        width: units.gu(5)
+
+                        anchors.centerIn: parent
+
+                        name: player.playbackState == true ? "media-playback-pause" : "media-playback-start"
+                    }
                 }
 
                 Icon {
