@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stream.slft\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-08 22:48+0000\n"
+"POT-Creation-Date: 2022-01-13 19:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,6 @@ msgstr ""
 msgid "Stream"
 msgstr ""
 
-#: ../qml/PlayerPage.qml:18
+#: ../qml/PlayerPage.qml:22
 msgid "Now playing"
 msgstr ""

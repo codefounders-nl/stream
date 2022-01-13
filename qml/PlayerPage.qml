@@ -13,6 +13,10 @@ Page {
     property string albumart
     property alias player: player
 
+    function millisecToPlaytime(millisec) {
+        return Math.floor(millisec / 60000) + ":" + ("0" + Math.floor((millisec % 60000) / 1000)).slice(-2)
+    }
+
     header: PageHeader {
                 id: playerPageHeader
                 title: i18n.tr('Now playing')
@@ -86,14 +90,24 @@ Page {
             }
             
             Slider {
+                id: slider
+
                 width: parent.width
                 height: units.gu(2)
 
-                minimumValue: 0
-                maximumValue: 100
-                value: 34
+                function formatValue(v) {
+                    return millisecToPlaytime(v)
+                }
 
-                // live: true
+                onPressedChanged: {
+                    player.seek(slider.value)
+                }
+
+                minimumValue: 0
+                maximumValue: player.duration
+                value: player.position
+
+                // live: false // false to let slider be updated
             }
 
             Item {
@@ -107,7 +121,7 @@ Page {
                         left: parent.left
                     }
                     
-                    text: "1:12" // TEMPORARY VALUE FOR DEMONSTRATION PURPOSES
+                    text: millisecToPlaytime(player.position)
                 }
 
                 Label {
@@ -117,7 +131,7 @@ Page {
                         right: parent.right
                     }
                     
-                    text: "3:31" // TEMPORARY VALUE FOR DEMONSTRATION PURPOSES
+                    text: millisecToPlaytime(player.duration)
                 }
             }
 
