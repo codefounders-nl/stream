@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import QtMultimedia 5.4
 
 Rectangle {
     width: parent.width
@@ -10,6 +11,7 @@ Rectangle {
     property string title
     property string artist
     property string albumart
+    property var    player
 
     MouseArea {
         anchors.fill: parent
@@ -40,11 +42,11 @@ Rectangle {
             verticalCenter: greyLine.verticalCenter
         }
 
-        // visible: 
+        visible: player.playbackState != Audio.StoppedState
         
         minimumValue: 0
-        maximumValue: 100
-        value: 34
+        maximumValue: player.duration
+        value: player.position
     }
 
     UbuntuShape {
@@ -112,18 +114,34 @@ Rectangle {
             text: artist
         }
 
-        Icon {
-            id: playIcon
-
-            width: units.gu(3)
+        MouseArea {
             height: units.gu(3)
+            width: units.gu(3)
 
             anchors {
                 right: parent.right
                 verticalCenter: parent.verticalCenter
             }
 
-            name: "media-playback-pause"
+            onClicked: {
+                if (player.playbackState == true) {
+                    player.pause()
+                }
+                else {
+                    player.play()
+                }
+            }
+
+            Icon {
+                id: playIcon
+
+                height: units.gu(3)
+                width: units.gu(3)
+
+                anchors.centerIn: parent
+
+                name: player.playbackState == true ? "media-playback-pause" : "media-playback-start"
+            }
         }
     }
 }

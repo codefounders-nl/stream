@@ -71,6 +71,7 @@ MainView {
             title: playerPage.title
             artist: playerPage.artist
             albumart: playerPage.albumart
+            player: playerPage.player
         }
     }
 

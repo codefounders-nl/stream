@@ -167,10 +167,10 @@ Page {
                 }
 
                 MouseArea {
-                    anchors.verticalCenter: parent.verticalCenter
-
                     height: units.gu(5)
                     width: units.gu(5)
+
+                    anchors.verticalCenter: parent.verticalCenter
 
                     onClicked: {
                         if (player.playbackState == true) {
