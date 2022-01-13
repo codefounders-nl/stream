@@ -24,6 +24,8 @@ Page {
 
     Audio {
         id: player
+
+        autoPlay: true
     }
     
     Image {
