@@ -14,7 +14,7 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Component.onCompleted: mainStack.push(mainPage)
+    Component.onCompleted: mainStack.push( Qt.resolvedUrl('pages/HomePage.qml'))
 
     PageStack {
         id: mainStack
@@ -30,6 +30,8 @@ MainView {
 
     Page {
         id: mainPage
+
+        visible: false
 
         anchors.fill: parent
 
@@ -74,6 +76,9 @@ MainView {
             player: playerPage.player
         }
     }
+
+
+
 
     PlayerPage {
         id: playerPage
