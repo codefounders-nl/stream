@@ -14,7 +14,10 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Component.onCompleted: mainStack.push( Qt.resolvedUrl('pages/HomePage.qml'))
+    Component.onCompleted: mainStack.push( Qt.resolvedUrl('pages/HomePage.qml'), {
+                                streamingProvider: 'Subsonic Playlist' 
+                            })
+                                //playListsDelegate: playListsItem 
 
     PageStack {
         id: mainStack
@@ -59,6 +62,9 @@ MainView {
                         }
                       }
 
+
+
+
             clip: true
         }
 
@@ -76,8 +82,6 @@ MainView {
             player: playerPage.player
         }
     }
-
-
 
 
     PlayerPage {

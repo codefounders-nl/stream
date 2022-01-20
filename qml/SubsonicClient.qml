@@ -22,4 +22,8 @@ Item {
         console.debug("url: " + url)
         return url
     }
+
+    function getPlaylists() {
+        return getUrl("getPlaylists")
+    }
 }

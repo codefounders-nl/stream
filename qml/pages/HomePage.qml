@@ -1,18 +1,20 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtMultimedia 5.4
+import ".."
 
 
 Page {
     id: homePage
 
     property string streamingProvider
+    //property alias playListsDelegate: tabPlayListListView.delegate
 
     header: PageHeader {
                 id: homePageHeader
 
                 title: i18n.tr('Stream')
-                subtitle: i18n.tr(streamingProvider)
+                subtitle: streamingProvider
 
                 extension: Sections {
                     id: homePageHeaderSections
@@ -45,8 +47,20 @@ Page {
             width: homePageTabView.width
             height: homePageTabView.height
 
-            Label{
-                text: 'Playlists'
+            ListView {
+                id: tabPlayListListView
+                anchors {
+                    fill: parent
+                }
+                
+                model: provider.playListsModel
+                delegate: PlaylistsItem {
+            id: playListsItem
+        client: provider.client
+        
+    }
+
+                clip: true
             }
             
         }

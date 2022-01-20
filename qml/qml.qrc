@@ -6,13 +6,9 @@
         <file>SubsonicListModel.qml</file>
         <file>pages/HomePage.qml</file>
         <file>PlaylistItem.qml</file>
+        <file>PlaylistsItem.qml</file>
         <file>BottomMenu.qml</file>
         <file>PlayerPage.qml</file>
-        <file>tmp/dathebjijgedaan.jpg</file>
-        <file>tmp/doittoit.jpg</file>
-        <file>tmp/easyonme.jpg</file>
-        <file>tmp/hartosaygoodbye.jpg</file>
-        <file>tmp/heatwaves.jpg</file>
-        <file>tmp/myuniverse.jpg</file>
+        <file>SubsonicPlaylistsModel.qml</file>
     </qresource>
 </RCC>
