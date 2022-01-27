@@ -7,6 +7,7 @@ XmlListModel {
     namespaceDeclarations: "declare default element namespace 'http://subsonic.org/restapi';"
     query: "/subsonic-response/playlists/playlist"
 
+    XmlRole { name: "playlistId"; query: "@id/string()" }
     XmlRole { name: "title"; query: "@name/string()" }
     XmlRole { name: "playlistArt"; query: "@coverArt/string()" }
     XmlRole { name: "duration"; query: "@duration/string()" }

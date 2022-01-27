@@ -14,10 +14,10 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Component.onCompleted: mainStack.push( Qt.resolvedUrl('pages/HomePage.qml'), {
-                                streamingProvider: 'Subsonic Playlist' 
+    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
+                                streamingProvider:  provider,
+                                pageStack: mainStack
                             })
-                                //playListsDelegate: playListsItem 
 
     PageStack {
         id: mainStack
@@ -28,61 +28,6 @@ MainView {
     SubsonicProvider {
         id: provider
     }
-
-    property var client : provider.client
-
-    Page {
-        id: mainPage
-
-        visible: false
-
-        anchors.fill: parent
-
-        header: PageHeader {
-                    id: header
-
-                    title: i18n.tr('Stream')
-                }
-                
-        ListView {
-            anchors {
-                fill: parent
-                topMargin: header.height
-                bottomMargin: bottomMenu.height
-            }
-            
-            model: provider.model
-            delegate: PlaylistItem {
-                        client: provider.client
-                        onSongSelected: {
-                            playerPage.title = title
-                            playerPage.artist = artist
-                            playerPage.albumart = albumart
-                            playerPage.player.source = source
-                        }
-                      }
-
-
-
-
-            clip: true
-        }
-
-        BottomMenu {
-            id: bottomMenu
-
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            title: playerPage.title
-            artist: playerPage.artist
-            albumart: playerPage.albumart
-            player: playerPage.player
-        }
-    }
-
 
     PlayerPage {
         id: playerPage

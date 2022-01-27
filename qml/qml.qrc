@@ -1,14 +1,15 @@
 <RCC>
     <qresource prefix="/">
+        <file>BottomMenu.qml</file>
         <file>Main.qml</file>
-        <file>SubsonicProvider.qml</file>
-        <file>SubsonicClient.qml</file>
-        <file>SubsonicListModel.qml</file>
-        <file>pages/HomePage.qml</file>
+        <file>PlayerPage.qml</file>
         <file>PlaylistItem.qml</file>
         <file>PlaylistsItem.qml</file>
-        <file>BottomMenu.qml</file>
-        <file>PlayerPage.qml</file>
+        <file>SubsonicClient.qml</file>
+        <file>SubsonicPlaylistModel.qml</file>
         <file>SubsonicPlaylistsModel.qml</file>
+        <file>SubsonicProvider.qml</file>
+        <file>pages/HomePage.qml</file>
+        <file>pages/PlaylistPage.qml</file>
     </qresource>
 </RCC>

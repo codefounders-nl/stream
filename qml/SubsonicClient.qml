@@ -5,6 +5,10 @@ Item {
     property string username
     property string password
 
+    property string currentPlaylistId
+    property string currentAlbumId
+    property string currentArtistId
+
     function getPlaylist(id) {
         return getUrl("getPlaylist", id)
     }
