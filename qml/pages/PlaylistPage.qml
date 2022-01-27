@@ -22,9 +22,8 @@ Page {
         anchors {
             fill: parent
             topMargin: header.height
-            bottomMargin: bottomMenu.height
         }
-        
+
         model: provider.playlistModel
         delegate: PlaylistItem {
                     client: provider.client
@@ -36,19 +35,5 @@ Page {
                     }
                 }
         clip: true
-    }
-
-    BottomMenu {
-        id: bottomMenu
-
-        anchors {
-            bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
-        }
-
-        title: playerPage.title
-        artist: playerPage.artist
-        albumart: playerPage.albumart
-        player: playerPage.player
     }
 }

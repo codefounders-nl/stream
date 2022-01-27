@@ -2,6 +2,7 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
 import QtMultimedia 5.4
+import "utility.js" as Utility
 
 Page {
     id: playerPage
@@ -12,10 +13,6 @@ Page {
     property string artist
     property string albumart
     property alias player: player
-
-    function millisecToPlaytime(millisec) {
-        return Math.floor(millisec / 60000) + ":" + ("0" + Math.floor((millisec % 60000) / 1000)).slice(-2)
-    }
 
     header: PageHeader {
                 id: playerPageHeader
@@ -98,7 +95,7 @@ Page {
                 height: units.gu(2)
 
                 function formatValue(v) {
-                    return millisecToPlaytime(v)
+                    return Utility.millisecToPlaytime(v)
                 }
 
                 onPressedChanged: {
@@ -123,7 +120,7 @@ Page {
                         left: parent.left
                     }
                     
-                    text: millisecToPlaytime(player.position)
+                    text: Utility.millisecToPlaytime(player.position)
                 }
 
                 Label {
@@ -133,7 +130,7 @@ Page {
                         right: parent.right
                     }
                     
-                    text: millisecToPlaytime(player.duration)
+                    text: Utility.millisecToPlaytime(player.duration)
                 }
             }
 

@@ -22,7 +22,27 @@ MainView {
     PageStack {
         id: mainStack
 
-        anchors.fill: parent
+        anchors {
+           fill: parent
+           bottomMargin: bottomMenu.height
+        }
+    }
+
+    BottomMenu {
+        id: bottomMenu
+
+        height: visible ? units.gu(9) : 0
+        visible: title != "" && mainStack.currentPage != playerPage
+
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        title: playerPage.title
+        artist: playerPage.artist
+        albumart: playerPage.albumart
+        player: playerPage.player
     }
 
     SubsonicProvider {

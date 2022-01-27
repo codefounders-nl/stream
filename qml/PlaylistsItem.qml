@@ -1,10 +1,12 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import "utility.js" as Utility
 
 ListItem {
     id: playlistItem
 
     height: units.gu(9)
+    enabled: duration > 0
     
     property var client
     signal playlistSelected(string playlistId, string playlistTitle)
@@ -74,7 +76,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: tracksAmount + ' tracks, ' + totalTimeCalculation(duration)
+            text: tracksAmount + ' tracks, ' +  Utility.secToPlaytimeHourFormat(duration)
         }
     }
 }

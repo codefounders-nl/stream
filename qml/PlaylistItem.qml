@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import "utility.js" as Utility
 
 ListItem {
     id: playlistItem
@@ -85,7 +86,7 @@ ListItem {
                 verticalCenter: parent.verticalCenter
             }
 
-            text: Math.floor(duration / 60) + ":" + duration % 60
+            text: Utility.millisecToPlaytime(duration * 1000)
         }
     }
 }

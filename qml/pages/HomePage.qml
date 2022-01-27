@@ -111,7 +111,6 @@ Page {
         anchors {
             fill: parent
             topMargin: homePageHeader.height
-            bottomMargin: bottomMenu.height
         } 
 
         model: homePageTabs

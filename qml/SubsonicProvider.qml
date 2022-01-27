@@ -12,11 +12,6 @@ Item {
         server: "http://demo.subsonic.org"
         username: "guest"
         password: "guest"
-
-        onCurrentPlaylistIdChanged: {
-            console.debug( "playlistId: " + currentPlaylistId)
-            client.currentPlaylistId = currentPlaylistId
-        }
     }
 
     SubsonicPlaylistModel {
