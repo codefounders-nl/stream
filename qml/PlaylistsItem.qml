@@ -7,9 +7,9 @@ ListItem {
     height: units.gu(9)
     
     property var client
-    signal playlistSelected(string playlistId)
+    signal playlistSelected(string playlistId, string playlistTitle)
 
-    onClicked: playlistSelected(playlistId)
+    onClicked: playlistSelected(playlistId, title)
 
     UbuntuShape {
         id: playlistArtShape
@@ -27,8 +27,7 @@ ListItem {
         source: Image {
                     id: playlistImage
 
-                    source: client.getCoverArt(playlistArt)
-                    
+                    source: client.getCoverArt(playlistArt)                   
                 }
 
         aspect: UbuntuShape.Inset

@@ -7,14 +7,14 @@ import ".."
 Page {
     id: homePage
 
-    property string streamingProvider
-    //property alias playListsDelegate: tabPlayListListView.delegate
+    property var streamingProvider
+    property var pageStack
 
     header: PageHeader {
                 id: homePageHeader
 
                 title: i18n.tr('Stream')
-                subtitle: streamingProvider
+                subtitle: streamingProvider.name
 
                 extension: Sections {
                     id: homePageHeaderSections
@@ -34,7 +34,6 @@ Page {
                     ]
 
                     onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
-
                 }
             }
 
@@ -49,21 +48,29 @@ Page {
 
             ListView {
                 id: tabPlayListListView
+                
                 anchors {
                     fill: parent
                 }
                 
-                model: provider.playListsModel
+                model: streamingProvider.playlistsModel
                 delegate: PlaylistsItem {
-            id: playListsItem
-        client: provider.client
-        
-    }
+                    id: playListsItem
+
+                    client: streamingProvider.client
+                    onPlaylistSelected: {
+                        streamingProvider.client.currentPlaylistId = playlistId
+                        pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {
+                                playlistTitle: playlistTitle,
+                                provider: streamingProvider
+                            })
+                    }         
+                }
 
                 clip: true
             }
-            
         }
+
         Item{
             id: tabArtists
 
@@ -73,8 +80,8 @@ Page {
             Label{
                 text: 'Artists'
             }
-
         }
+
         Item{
             id: tabAlbums
 
@@ -84,8 +91,8 @@ Page {
             Label{
                 text: 'Albums'
             }
-
         }
+
         Item{
             id: tabPodcasts
 
@@ -116,15 +123,5 @@ Page {
         snapMode: ListView.SnapOneItem
 
         onCurrentIndexChanged: homePageHeaderSections.selectedIndex = currentIndex
-
-    }
-
-
-
-
-
-
-
-
-
+   }
 }

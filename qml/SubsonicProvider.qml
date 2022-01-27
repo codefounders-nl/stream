@@ -1,9 +1,10 @@
 import QtQuick 2.7
 
 Item {
-    property alias client : client
-    property alias model: model
-    property alias playListsModel : playListsModel
+    property string name: "Subsonic"
+    property alias client: client
+    property alias playlistModel: playlistModel
+    property alias playlistsModel: playlistsModel
 
     SubsonicClient{
         id: client
@@ -11,16 +12,21 @@ Item {
         server: "http://demo.subsonic.org"
         username: "guest"
         password: "guest"
+
+        onCurrentPlaylistIdChanged: {
+            console.debug( "playlistId: " + currentPlaylistId)
+            client.currentPlaylistId = currentPlaylistId
+        }
     }
 
-    SubsonicListModel {
-        id: model
+    SubsonicPlaylistModel {
+        id: playlistModel
 
-        source: client.getPlaylist(1507)
-        
+        source: client.getPlaylist(client.currentPlaylistId)
     }
+
     SubsonicPlaylistsModel{
-        id: playListsModel
+        id: playlistsModel
 
         source: client.getPlaylists()
     }
