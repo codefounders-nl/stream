@@ -5,7 +5,8 @@
 .node_anchors:
   # `stage`
   stage_build: &stage_build 'build'
-  # `image`
+  stage_publish: &stage_publish 'publish'
+    # `image`
   image_clickable_amd64: &image_clickable_amd64 'clickable/ci-16.04-amd64'
   image_clickable_arm64: &image_clickable_arm64 'clickable/ci-16.04-arm64'
   image_clickable_armhf: &image_clickable_armhf 'clickable/ci-16.04-armhf'
@@ -22,6 +23,7 @@
 ###############################################################################
 stages:
   - *stage_build
+  - *stage_publish
 
 ###############################################################################
 # Define `build` template
@@ -35,22 +37,55 @@ stages:
     expire_in: '1 week'
 
 ###############################################################################
+# Define `publish` template
+###############################################################################
+.publish_click:
+  stage: *stage_build
+  script:
+    - 'clickable build'
+    - 'clickable review'
+    - 'clickable publish "$CI_COMMIT_MESSAGE"'
+  artifacts:
+    expire_in: '1 hour'
+
+###############################################################################
 # `build` stage: build clicks for `armhf`, `arm64` & `amd64`
 ###############################################################################
-xenial_armhf_click:
+xenial_armhf_build:
   extends: '.build_click'
   image: *image_clickable_armhf
   artifacts:
     paths: *paths_armhf
 
-xenial_arm64_click:
+xenial_arm64_build:
   extends: '.build_click'
   image: *image_clickable_arm64
   artifacts:
     paths: *paths_arm64
 
-xenial_amd64_click:
+xenial_amd64_build:
   extends: '.build_click'
+  image: *image_clickable_amd64
+  artifacts:
+    paths: *paths_amd64
+
+###############################################################################
+# `publish` stage: publishes clicks for `armhf`, `arm64` & `amd64`
+###############################################################################
+xenial_armhf_publish:
+  extends: '.publish_click'
+  image: *image_clickable_armhf
+  artifacts:
+    paths: *paths_armhf
+
+xenial_arm64_publish:
+  extends: '.publish_click'
+  image: *image_clickable_arm64
+  artifacts:
+    paths: *paths_arm64
+
+xenial_amd64_publish:
+  extends: '.publish_click'
   image: *image_clickable_amd64
   artifacts:
     paths: *paths_amd64
