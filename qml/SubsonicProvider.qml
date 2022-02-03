@@ -8,10 +8,6 @@ Item {
 
     SubsonicClient{
         id: client
-
-        server: "http://demo.subsonic.org"
-        username: "guest"
-        password: "guest"
     }
 
     SubsonicPlaylistModel {

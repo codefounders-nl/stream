@@ -1,4 +1,5 @@
 import QtQuick 2.7
+import QtQuick.XmlListModel 2.0
 
 Item {
     property string server
@@ -29,5 +30,32 @@ Item {
 
     function getPlaylists() {
         return getUrl("getPlaylists")
+    }
+
+    function login(serverurl,username,password,callbackFunc) {
+        pingModel.callbackFunc = callbackFunc
+        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
+    }
+
+    XmlListModel {
+        id: pingModel
+
+        property var callbackFunc
+        
+        onStatusChanged: {
+            console.log(pingModel.source)
+            console.log(pingModel.status)
+            console.log(pingModel.get(0))
+            if (status == XmlListModel.Ready) {
+                callbackFunc(pingModel.get(0))
+            }
+        }
+
+        namespaceDeclarations: "declare default element namespace 'http://subsonic.org/restapi';"
+        query: "/subsonic-response"
+
+        XmlRole { name: "status"; query: "@status/string()" }
+        XmlRole { name: "errorcode"; query: "error/@code/string()" }
+        XmlRole { name: "errormessage"; query: "error/@message/string()" }
     }
 }

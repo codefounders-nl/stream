@@ -14,10 +14,19 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
+    //Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
+    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"), {
                                 streamingProvider:  provider,
                                 pageStack: mainStack
                             })
+
+    Settings {
+        id: settings
+
+        property string serverurl
+        property string username
+        property string password        
+    }
 
     PageStack {
         id: mainStack
@@ -47,6 +56,10 @@ MainView {
 
     SubsonicProvider {
         id: provider
+
+        client.server: settings.serverurl
+        client.username: settings.username
+        client.password: settings.password
     }
 
     PlayerPage {
