@@ -1,24 +1,41 @@
 import QtQuick 2.7
+import Qt.labs.settings 1.0
 
 Item {
     property string name: "Subsonic"
-    property alias client: client
-    property alias playlistModel: playlistModel
-    property alias playlistsModel: playlistsModel
+    property alias client: _client
+    property alias settings: _settings
+    property alias playlistModel: _playlistModel
+    property alias playlistsModel: _playlistsModel
+
+    Settings {
+        id: _settings
+
+        category: "Subsonic"
+
+        property string serverurl
+        property string username
+        property string password        
+    }
+
 
     SubsonicClient{
-        id: client
+        id: _client
+
+        server: _settings.serverurl
+        username: _settings.username
+        password: _settings.password
     }
 
     SubsonicPlaylistModel {
-        id: playlistModel
+        id: _playlistModel
 
-        source: client.getPlaylist(client.currentPlaylistId)
+        source: _client.getPlaylist(client.currentPlaylistId)
     }
 
     SubsonicPlaylistsModel{
-        id: playlistsModel
+        id: _playlistsModel
 
-        source: client.getPlaylists()
+        source: _client.getPlaylists()
     }
 }
