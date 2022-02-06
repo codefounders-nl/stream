@@ -63,6 +63,17 @@ Page {
 
         spacing: units.gu(1)
 
+        Label {
+            id: errorLabel
+
+            width: parent.width
+            
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            color: theme.palette.normal.negative
+            visible: text != ""
+        }
+
         TextField {
             id: serverurlField
 
@@ -108,6 +119,7 @@ Page {
                 var loginResult = provider.client.login(serverurlField.text, usernameField.text, passwordField.text,
                                   function(loginResult){
                                     console.log(JSON.stringify(loginResult))
+                                    errorLabel.text = loginResult.errormessage
                                     if (loginResult.status == "ok") {
                                         provider.settings.serverurl = serverurlField.text
                                         provider.settings.username = usernameField.text
