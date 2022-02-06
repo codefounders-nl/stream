@@ -3,7 +3,6 @@ import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 
-import Example 1.0
 
 MainView {
     id: root
