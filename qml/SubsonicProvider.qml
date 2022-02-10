@@ -15,7 +15,11 @@ Item {
 
         property string serverurl
         property string username
-        property string password        
+        property string password
+
+        function needsCredentials() {
+            return password == ""
+        }
     }
 
 
