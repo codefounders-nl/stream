@@ -12,6 +12,12 @@ Page {
                 title: "Subsonic"
             }
 
+    Component.onCompleted: {
+        serverurlField.text = provider.settings.serverurl
+        usernameField.text = provider.settings.username
+        passwordField.text = provider.settings.password
+    }
+
     Image {
         id: icon
 
@@ -57,6 +63,17 @@ Page {
 
         spacing: units.gu(1)
 
+        Label {
+            id: errorLabel
+
+            width: parent.width
+            
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            color: theme.palette.normal.negative
+            visible: text != ""
+        }
+
         TextField {
             id: serverurlField
 
@@ -99,12 +116,14 @@ Page {
             text: "Log in"
 
             onClicked: {
-                var loginResult = provider.client.login(serverurlField.text,usernameField.text,passwordField.text,
+                var loginResult = provider.client.login(serverurlField.text, usernameField.text, passwordField.text,
                                   function(loginResult){
+                                    console.log(JSON.stringify(loginResult))
+                                    errorLabel.text = loginResult.errormessage
                                     if (loginResult.status == "ok") {
-                                        settings.serverurl = serverurlField.text
-                                        settings.username = usernameField.text
-                                        settings.password = passwordField.text
+                                        provider.settings.serverurl = serverurlField.text
+                                        provider.settings.username = usernameField.text
+                                        provider.settings.password = passwordField.text
                                         mainStack.clear()
                                         mainStack.push( Qt.resolvedUrl("HomePage.qml"),{
                                             streamingProvider:  provider,
@@ -126,7 +145,5 @@ Page {
 
             onClicked: mainStack.pop()
         }
-
-    }
-
+   }
 }

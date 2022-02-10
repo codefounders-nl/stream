@@ -1,9 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
-import Qt.labs.settings 1.0
-
-import Example 1.0
 
 MainView {
     id: root
@@ -19,14 +16,6 @@ MainView {
                                 streamingProvider:  provider,
                                 pageStack: mainStack
                             })
-
-    Settings {
-        id: settings
-
-        property string serverurl
-        property string username
-        property string password        
-    }
 
     PageStack {
         id: mainStack
@@ -56,10 +45,6 @@ MainView {
 
     SubsonicProvider {
         id: provider
-
-        client.server: settings.serverurl
-        client.username: settings.username
-        client.password: settings.password
     }
 
     PlayerPage {
