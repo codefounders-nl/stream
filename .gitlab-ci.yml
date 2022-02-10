@@ -42,7 +42,7 @@ stages:
 # Define `publish` template
 ###############################################################################
 .publish_click:
-  stage: *stage_build
+  stage: *stage_publish
   only:
     - tags
   script:
