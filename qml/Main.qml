@@ -11,12 +11,15 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    //Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
-    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"), {
+    Component.onCompleted: {
+        if (provider.settings.needsCredentials())
+            mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"))
+        else
+            mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
                                 streamingProvider:  provider,
                                 pageStack: mainStack
                             })
-
+    }
     PageStack {
         id: mainStack
 
