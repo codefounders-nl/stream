@@ -35,6 +35,16 @@ Page {
 
                     onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
                 }
+
+                trailingActionBar {
+                    actions: [
+                        Action {
+                            iconName: "settings"
+                            text: "Settings"
+                            onTriggered: mainStack.push( Qt.resolvedUrl("SubsonicLoginPage.qml"))
+                        }
+                    ]
+                }
             }
 
 

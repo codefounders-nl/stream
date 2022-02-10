@@ -9,8 +9,13 @@
         <file>SubsonicPlaylistModel.qml</file>
         <file>SubsonicPlaylistsModel.qml</file>
         <file>SubsonicProvider.qml</file>
+        <file>pages/WelcomePage.qml</file>
         <file>pages/HomePage.qml</file>
         <file>pages/PlaylistPage.qml</file>
+        <file>pages/SubsonicLoginPage.qml</file>
+        <file>icons/stream.svg</file>
+        <file>icons/subsonic.png</file>
+        <file>icons/spotify.png</file>
         <file>utility.js</file>
     </qresource>
 </RCC>

@@ -1,9 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
-import Qt.labs.settings 1.0
-
-import Example 1.0
 
 MainView {
     id: root
@@ -14,7 +11,8 @@ MainView {
     width: units.gu(45)
     height: units.gu(75)
 
-    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
+    //Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
+    Component.onCompleted: mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"), {
                                 streamingProvider:  provider,
                                 pageStack: mainStack
                             })
