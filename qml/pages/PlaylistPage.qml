@@ -4,7 +4,7 @@ import QtMultimedia 5.4
 import ".."
 
 
-Page {
+PageBase {
     id: playlistPage
 
     property alias playlistTitle : header.title
