@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
+import "pages"
 
 MainView {
     id: root
@@ -33,7 +34,7 @@ MainView {
         id: bottomMenu
 
         height: visible ? units.gu(9) : 0
-        visible: title != "" && mainStack.currentPage != playerPage
+        visible: title != "" && mainStack.currentPage.showBottomMenu
 
         anchors {
             bottom: parent.bottom

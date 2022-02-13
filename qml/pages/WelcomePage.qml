@@ -2,10 +2,12 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
 
-Page {
+PageBase {
     id: welcomePage
 
     anchors.fill: parent
+
+    showBottomMenu: false
 
     header: PageHeader {
                 id: welcomePageHeader

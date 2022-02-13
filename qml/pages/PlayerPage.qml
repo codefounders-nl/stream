@@ -2,12 +2,14 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
 import QtMultimedia 5.4
-import "utility.js" as Utility
+import "../utility.js" as Utility
 
-Page {
+PageBase {
     id: playerPage
 
     anchors.fill: parent
+
+    showBottomMenu: false
 
     property string title
     property string artist
