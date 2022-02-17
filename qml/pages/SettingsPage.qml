@@ -8,7 +8,7 @@ PageBase {
 
     header : PageHeader {
                 id: settingsPageHeader
-                title: i18n.tr('Settings')
+                title: i18n.tr('SettingsXX')
             }
     Column{
         id: tabSettingsColumn
