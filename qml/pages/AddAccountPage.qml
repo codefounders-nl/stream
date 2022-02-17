@@ -6,15 +6,13 @@ PageBase {
 
     showBottomMenu : false
 
-    header : PageHeader {
-                id: addAccountPageHeader
-                title: i18n.tr('Add Account')
-            }
+    pageHeader.title: i18n.tr('Add Account')
+
     Column{
         id: addAccountColumn
 
         anchors {
-            topMargin: addAccountPageHeader.height
+            topMargin: pageHeader.height
             fill: parent
         }
 

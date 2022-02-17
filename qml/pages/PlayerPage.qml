@@ -16,10 +16,7 @@ PageBase {
     property string albumart
     property alias player: player
 
-    header: PageHeader {
-                id: playerPageHeader
-                title: i18n.tr('Now playing')
-            }
+    pageHeader.title: i18n.tr('Now playing')
 
     Audio {
         id: player

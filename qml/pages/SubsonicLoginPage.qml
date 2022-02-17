@@ -9,10 +9,7 @@ PageBase {
 
     showBottomMenu: false
 
-    header: PageHeader {
-                id: loginPageHeader
-                title: "Subsonic"
-            }
+    pageHeader.title: "Subsonic"
 
     Component.onCompleted: {
         serverurlField.text = provider.settings.serverurl
@@ -28,7 +25,7 @@ PageBase {
 
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: loginPageHeader.bottom
+            top: pageHeader.bottom
             topMargin: units.gu(2)
         }
 
@@ -126,6 +123,7 @@ PageBase {
                                         provider.settings.serverurl = serverurlField.text
                                         provider.settings.username = usernameField.text
                                         provider.settings.password = passwordField.text
+                                        
                                         mainStack.clear()
                                         mainStack.push( Qt.resolvedUrl("HomePage.qml"),{
                                             streamingProvider:  provider,

@@ -16,11 +16,7 @@ MainView {
 
         property bool darkMode: false
 
-        onDarkModeChanged: if (darkMode){
-                                Theme.name = "Ubuntu.Components.Themes.SuruDark"
-                            }else{
-                                Theme.name = "Ubuntu.Components.Themes.Ambiance"
-                            }
+        onDarkModeChanged: Theme.name = darkMode ? "Ubuntu.Components.Themes.SuruDark" : "Ubuntu.Components.Themes.Ambiance"
     }
 
     width: units.gu(45)
