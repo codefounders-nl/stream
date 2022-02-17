@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stream.slft\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-03 21:11+0000\n"
+"POT-Creation-Date: 2022-02-17 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/PlayerPage.qml:19
-msgid "Now playing"
+#: ../qml/pages/AccountsPage.qml:11
+msgid "Accounts"
+msgstr ""
+
+#: ../qml/pages/AddAccountPage.qml:11
+msgid "Add Account"
 msgstr ""
 
 #: ../qml/pages/HomePage.qml:16 stream.desktop.in.h:1
 msgid "Stream"
+msgstr ""
+
+#: ../qml/pages/PlayerPage.qml:21
+msgid "Now playing"
+msgstr ""
+
+#: ../qml/pages/SettingsPage.qml:11
+msgid "Settings"
 msgstr ""

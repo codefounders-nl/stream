@@ -41,7 +41,7 @@ PageBase {
                         Action {
                             iconName: "settings"
                             text: "Settings"
-                            onTriggered: mainStack.push( Qt.resolvedUrl("SubsonicLoginPage.qml"))
+                            onTriggered: mainStack.push( Qt.resolvedUrl("SettingsPage.qml"))
                         }
                     ]
                 }

@@ -2,12 +2,26 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
 import "pages"
+import Qt.labs.settings 1.0
 
 MainView {
     id: root
     objectName: 'mainView'
     applicationName: 'stream.slft'
     automaticOrientation: true
+    Settings{
+        id: generalSettings
+
+        category: "General"
+
+        property bool darkMode: false
+
+        onDarkModeChanged: if (darkMode){
+                                Theme.name = "Ubuntu.Components.Themes.SuruDark"
+                            }else{
+                                Theme.name = "Ubuntu.Components.Themes.Ambiance"
+                            }
+    }
 
     width: units.gu(45)
     height: units.gu(75)
