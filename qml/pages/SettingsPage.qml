@@ -60,13 +60,14 @@ PageBase {
             }
 
             Switch{
+                checked: generalSettings.darkMode
+                onCheckedChanged: generalSettings.darkMode = checked
+                
                 anchors{
                     verticalCenter: parent.verticalCenter
                     right: parent.right
                     rightMargin: units.gu(2)
-                }
-
-               // onClicked: 
+                } 
             }
         }        
     }
