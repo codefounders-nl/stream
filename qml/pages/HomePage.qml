@@ -10,42 +10,41 @@ PageBase {
     property var streamingProvider
     property var pageStack
 
-    header: PageHeader {
-                id: homePageHeader
+    pageHeader {
 
-                title: i18n.tr('Stream')
-                subtitle: streamingProvider.name
+        title: i18n.tr('Stream')
+        subtitle: streamingProvider.name
 
-                extension: Sections {
-                    id: homePageHeaderSections
-                    actions: [ 
-                        Action {
-                            text: 'Playlists'
-                        },
-                        Action {
-                            text: 'Artists'
-                        },
-                        Action {
-                            text: 'Albums'
-                        },
-                        Action {
-                            text: 'Podcasts'
-                        }
-                    ]
-
-                    onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
+        extension: Sections {
+            id: homePageHeaderSections
+            actions: [ 
+                Action {
+                    text: 'Playlists'
+                },
+                Action {
+                    text: 'Artists'
+                },
+                Action {
+                    text: 'Albums'
+                },
+                Action {
+                    text: 'Podcasts'
                 }
+            ]
 
-                trailingActionBar {
-                    actions: [
-                        Action {
-                            iconName: "settings"
-                            text: "Settings"
-                            onTriggered: mainStack.push( Qt.resolvedUrl("SettingsPage.qml"))
-                        }
-                    ]
+            onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
+        }
+
+        trailingActionBar {
+            actions: [
+                Action {
+                    iconName: "settings"
+                    text: "Settings"
+                    onTriggered: mainStack.push( Qt.resolvedUrl("SettingsPage.qml"))
                 }
-            }
+            ]
+        }
+    }
 
 
     VisualItemModel {
@@ -120,7 +119,7 @@ PageBase {
 
         anchors {
             fill: parent
-            topMargin: homePageHeader.height
+            topMargin: pageHeader.height
         } 
 
         model: homePageTabs

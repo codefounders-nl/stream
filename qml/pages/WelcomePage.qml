@@ -9,10 +9,7 @@ PageBase {
 
     showBottomMenu: false
 
-    header: PageHeader {
-                id: welcomePageHeader
-                title: "Stream"
-            }
+    pageHeader.title: "Stream"
 
     UbuntuShape {
         id: appIcon
@@ -22,7 +19,7 @@ PageBase {
 
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: welcomePageHeader.bottom
+            top: pageHeader.bottom
             topMargin: units.gu(2)
         }
 

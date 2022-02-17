@@ -6,10 +6,8 @@ PageBase {
 
     showBottomMenu : false
 
-    header : PageHeader {
-                id: accountsPageHeader
-                title: i18n.tr('Accounts')
-            }
+    pageHeader.title: i18n.tr('Accounts')
+
     Button{
         id: addAccountsButton
 
@@ -21,7 +19,7 @@ PageBase {
 
         anchors{
             horizontalCenter: parent.horizontalCenter
-            top: accountsPageHeader.bottom
+            top: pageHeader.bottom
             topMargin: units.gu(2)
         }
     }

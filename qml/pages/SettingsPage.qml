@@ -6,15 +6,13 @@ PageBase {
 
     showBottomMenu : false
 
-    header : PageHeader {
-                id: settingsPageHeader
-                title: i18n.tr('Settings.')
-            }
+    pageHeader.title: i18n.tr('Settings')
+
     Column{
         id: tabSettingsColumn
         
         anchors {
-            topMargin: settingsPageHeader.height
+            topMargin: pageHeader.height
             fill: parent
         }
 
