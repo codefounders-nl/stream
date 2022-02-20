@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
+import Account 1.0
 
 PageBase {
     id: subsonicLoginPage
@@ -12,6 +13,8 @@ PageBase {
     pageHeader.title: "Subsonic"
 
     Component.onCompleted: {
+        accountNameField.text = provider.settings.category
+        accountNameField.enabled = provider.settings.category == ""
         serverurlField.text = provider.settings.serverurl
         usernameField.text = provider.settings.username
         passwordField.text = provider.settings.password
@@ -74,6 +77,16 @@ PageBase {
         }
 
         TextField {
+            id: accountNameField
+
+            width: parent.width
+
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            placeholderText: "Account name"
+        }
+
+        TextField {
             id: serverurlField
 
             width: parent.width
@@ -120,10 +133,11 @@ PageBase {
                                     console.log(JSON.stringify(loginResult))
                                     errorLabel.text = loginResult.errormessage
                                     if (loginResult.status == "ok") {
+                                        generalSettings.currentAccount = accountNameField.text
                                         provider.settings.serverurl = serverurlField.text
                                         provider.settings.username = usernameField.text
                                         provider.settings.password = passwordField.text
-                                        
+                                        AccountModel.refresh();
                                         mainStack.clear()
                                         mainStack.push( Qt.resolvedUrl("HomePage.qml"),{
                                             streamingProvider:  provider,

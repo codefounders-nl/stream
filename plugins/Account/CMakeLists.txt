@@ -1,10 +1,12 @@
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(PLUGIN "Example")
+set(PLUGIN "Account")
 
 set(
     SRC
     plugin.cpp
-    example.cpp
+    account.cpp
+    account.cpp
+    accountmodel.cpp
 )
 
 set(CMAKE_AUTOMOC ON)

@@ -13,6 +13,7 @@ Item {
 
         category: "Subsonic"
 
+        property int accountType: 0 // Account::Type::Subsonic
         property string serverurl
         property string username
         property string password

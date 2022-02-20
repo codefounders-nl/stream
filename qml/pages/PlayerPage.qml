@@ -32,7 +32,7 @@ PageBase {
 
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: playerPageHeader.bottom
+            top: pageHeader.bottom
         }
 
         source: albumart
