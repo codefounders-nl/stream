@@ -19,7 +19,10 @@ PageBase {
         ListItem{
             id: subSonicListItem
 
-            onClicked: mainStack.push( Qt.resolvedUrl("SubsonicLoginPage.qml"))
+            onClicked: {
+                provider.settings.category = ""
+                mainStack.push( Qt.resolvedUrl("SubsonicLoginPage.qml"))
+            }
 
             Image {
                 id: subSonicIcon

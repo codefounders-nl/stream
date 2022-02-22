@@ -24,7 +24,7 @@ Item {
 
     function getUrl(operation, id) {
         var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password + "&id=" + id
-        console.debug("url: " + url)
+        //console.debug("url: " + url)
         return url
     }
 
