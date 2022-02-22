@@ -63,11 +63,11 @@ QHash<int, QByteArray> AccountModel::roleNames() const
 {
     static QHash<int, QByteArray> roles;
     if (roles.empty()) {
-        roles.insert(Roles::Name, "name");
-        roles.insert(Roles::Type, "type");
-        roles.insert(Roles::Uri, "uri");
-        roles.insert(Roles::Username, "username");
-        roles.insert(Roles::Secret, "secret");
+        roles.insert(Roles::Name, "accountName");
+        roles.insert(Roles::Type, "accountType");
+        roles.insert(Roles::Uri, "accountUri");
+        roles.insert(Roles::Username, "accountUsername");
+        roles.insert(Roles::Secret, "accountSecret");
     }
     return roles;
 }
@@ -90,9 +90,8 @@ Account *AccountModel::get(int index) const
     return nullptr;
 }
 
-void AccountModel::remove(Account* account)
+void AccountModel::remove(const QString &name)
 {
-    auto name = account->name();
     auto index = indexOf(name);
     beginRemoveRows(QModelIndex(), index, index);
     m_accounts.removeAt(index);
@@ -105,12 +104,13 @@ void AccountModel::remove(Account* account)
 void AccountModel::refresh()
 {
     beginResetModel();
+    m_accounts.clear();
     endResetModel();
+
     for (const auto& group: m_settings.childGroups()) {
         qDebug() << "Settings Group: " << group;
-        if (group == "General") continue;
-
         auto name = group;
+        if (isHidden(name)) continue;
 
         m_settings.beginGroup(group);
         Account *account = new Account(name, this);
@@ -124,6 +124,11 @@ void AccountModel::refresh()
         m_accounts << account;
         endInsertRows();
     }
+}
+
+bool AccountModel::isHidden(const QString &name) const 
+{
+    return (name == "General");
 }
 
 int AccountModel::indexOf(const QString& name)

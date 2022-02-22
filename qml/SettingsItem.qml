@@ -6,10 +6,26 @@ ListItem {
     id: settingItem
 
     height: units.gu(9)
-    
+
     signal settingSelected(string settingName, string settingType)
 
-    onClicked: settingSelected(name, type)
+    leadingActions: ListItemActions {
+                        id: listItemActions
+
+                        actions: [
+                            Action {
+                                iconName: "delete"
+                                onTriggered: {
+                                    console.debug("About to delete account:", accountName)
+                                    AccountModel.remove(accountName)
+                                }
+                            }
+                        ]
+                    }
+ 
+
+
+    onClicked: settingSelected(accountName, accountType)
 
     UbuntuShape {
         id: settingShape
@@ -56,7 +72,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: name
+            text: accountName
         }
 
         Label {
@@ -72,7 +88,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: username
+            text: accountUsername
         }
     }
 }

@@ -10,6 +10,13 @@ PageBase {
 
     pageHeader.title: i18n.tr('Accounts')
 
+    Component.onCompleted: {
+        // refresh model and view
+        listview.model = null
+        AccountModel.refresh();
+        listview.model = AccountModel
+    }
+
     Column {
 
         anchors {
@@ -28,6 +35,7 @@ PageBase {
             height: parent.height - addAccountsButton.height - units.gu(2)
 
             model: AccountModel
+ 
             delegate: SettingsItem {
                         onSettingSelected: {
                             console.debug("settingType:",settingType, "; settingName:", settingName)

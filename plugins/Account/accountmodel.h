@@ -44,14 +44,14 @@ public:
     Q_INVOKABLE Account *get(const QString& name) const;
     Q_INVOKABLE Account *get(const int index) const;
 
-    Q_INVOKABLE void remove(Account* account);
-    Q_INVOKABLE void save(Account* account);
+    Q_INVOKABLE void remove(const QString& name);
 
     Q_INVOKABLE Account *createAccount(const QString& text=QString());
 
     Q_INVOKABLE void refresh();
 
 private:
+    bool isHidden(const QString& name) const;
     int indexOf(const QString& name);
 
     QList<Account*> m_accounts;

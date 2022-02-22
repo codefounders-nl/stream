@@ -131,13 +131,15 @@ PageBase {
                 var loginResult = provider.client.login(serverurlField.text, usernameField.text, passwordField.text,
                                   function(loginResult){
                                     console.log(JSON.stringify(loginResult))
+
                                     errorLabel.text = loginResult.errormessage
                                     if (loginResult.status == "ok") {
+
                                         generalSettings.currentAccount = accountNameField.text
                                         provider.settings.serverurl = serverurlField.text
                                         provider.settings.username = usernameField.text
                                         provider.settings.password = passwordField.text
-                                        AccountModel.refresh();
+
                                         mainStack.clear()
                                         mainStack.push( Qt.resolvedUrl("HomePage.qml"),{
                                             streamingProvider:  provider,
