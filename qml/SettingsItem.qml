@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 import Account 1.0
 
 ListItem {
@@ -16,8 +17,9 @@ ListItem {
                             Action {
                                 iconName: "delete"
                                 onTriggered: {
-                                    console.debug("About to delete account:", accountName)
-                                    AccountModel.remove(accountName)
+                                    accountsPage.accountToDelete = accountName
+                                    PopupUtils.open(deleteDialog)
+                                    console.debug("About to delete account:", accountName)                                   
                                 }
                             }
                         ]
@@ -89,6 +91,20 @@ ListItem {
             elide: Text.ElideRight
 
             text: accountUsername
+        }
+    }
+    Icon{
+        name: 'toolkit_tick'
+
+        visible: generalSettings.currentAccount == accountName
+
+        height: units.gu(2.5)
+        width: units.gu(2.5)
+
+        anchors{
+            verticalCenter: parent.verticalCenter
+            right: parent.right
+            rightMargin: units.gu(2)    
         }
     }
 }
