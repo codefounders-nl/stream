@@ -17,11 +17,9 @@ ListItem {
                             Action {
                                 iconName: "delete"
                                 onTriggered: {
-                                    //deleteDialog.ffonhouden
-                                    deleteConfirm.accountToDelete = accountName
+                                    accountsPage.accountToDelete = accountName
                                     PopupUtils.open(deleteDialog)
-                                    console.debug("About to delete account:", accountName)
-                                   // AccountModel.remove(accountName)
+                                    console.debug("About to delete account:", accountName)                                   
                                 }
                             }
                         ]
@@ -93,6 +91,20 @@ ListItem {
             elide: Text.ElideRight
 
             text: accountUsername
+        }
+    }
+    Icon{
+        name: 'toolkit_tick'
+
+        visible: generalSettings.currentAccount == accountName
+
+        height: units.gu(2.5)
+        width: units.gu(2.5)
+
+        anchors{
+            verticalCenter: parent.verticalCenter
+            right: parent.right
+            rightMargin: units.gu(2)    
         }
     }
 }

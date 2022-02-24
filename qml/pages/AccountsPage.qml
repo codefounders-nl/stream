@@ -11,6 +11,8 @@ PageBase {
 
     pageHeader.title: i18n.tr('Accounts')
 
+    property string accountToDelete
+
     Component.onCompleted: {
         // refresh model and view
         listview.model = null
@@ -71,14 +73,24 @@ PageBase {
 
         Dialog{
             id: deleteConfirm
-            //ffonthouden string
-            property string accountToDelete
-            title: deleteAccount
-            text: accountToDelete+'Are you sure you want to delete this account from Stream? If it’s the only account you’re signed in to, you’ll have to sign in to another account to keep using Stream.'
+            
+            title: 'Delete Account'
+            text: 'Are you sure you want to delete this account from Stream? If it’s the only account you’re signed in to, you’ll have to sign in to another account to keep using Stream.'
+
             Button{
                 text: 'Delete Account'
                 color: UbuntuColors.red
-
+                onClicked: {
+                    AccountModel.remove(accountToDelete)
+                    PopupUtils.close(deleteConfirm)
+                    if(AccountModel.get(0) == null){
+                        mainStack.clear()
+                        mainStack.push(Qt.resolvedUrl("WelcomePage.qml"))
+                        generalSettings.currentAccount = null
+                    }else{
+                        generalSettings.currentAccount = AccountModel.get(0).name
+                    }
+                }
             }
             Button{
                 text: 'Cancel'
