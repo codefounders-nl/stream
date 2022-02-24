@@ -1,6 +1,12 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
+
+import Qt.labs.settings 1.0
+import Qt.labs.platform 1.0
+
+import Account 1.0
+
 import "pages"
 
 MainView {
@@ -8,6 +14,23 @@ MainView {
     objectName: 'mainView'
     applicationName: 'stream.slft'
     automaticOrientation: true
+    Settings{
+        id: generalSettings
+
+        category: "General"
+        property bool darkMode: false
+        property string currentAccount
+
+        onDarkModeChanged: Theme.name = darkMode ? "Ubuntu.Components.Themes.SuruDark" : "Ubuntu.Components.Themes.Ambiance"
+        onCurrentAccountChanged: provider.settings.category = currentAccount
+
+        Component.onCompleted: {
+            console.debug( "CurrentAccount: ", currentAccount, "; Accounts#: ", AccountModel.rowCount())
+            if (currentAccount == "" && AccountModel.rowCount() > 0) {
+                currentAccount = AccountModel.get(0).name;
+            }
+        }
+    }
 
     width: units.gu(45)
     height: units.gu(75)
@@ -49,6 +72,7 @@ MainView {
 
     SubsonicProvider {
         id: provider
+        settings.category: generalSettings.currentAccount
     }
 
     PlayerPage {

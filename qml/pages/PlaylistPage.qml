@@ -7,21 +7,19 @@ import ".."
 PageBase {
     id: playlistPage
 
-    property alias playlistTitle : header.title
+    property string playlistTitle 
     property var provider
 
     anchors.fill: parent
 
-    header: PageHeader {
-                id: header
-            }
-            
+    pageHeader.title: playlistTitle
+
     ListView {
         id: listview
 
         anchors {
             fill: parent
-            topMargin: header.height
+            topMargin: pageHeader.height
         }
 
         model: provider.playlistModel
