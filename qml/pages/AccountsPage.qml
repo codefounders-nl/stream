@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 import Account 1.0
 import ".."
 
@@ -62,6 +63,27 @@ PageBase {
             anchors{
                 horizontalCenter: parent.horizontalCenter
              }
+        }
+    }
+    Component{
+        id: deleteDialog
+        
+
+        Dialog{
+            id: deleteConfirm
+            //ffonthouden string
+            property string accountToDelete
+            title: deleteAccount
+            text: accountToDelete+'Are you sure you want to delete this account from Stream? If it’s the only account you’re signed in to, you’ll have to sign in to another account to keep using Stream.'
+            Button{
+                text: 'Delete Account'
+                color: UbuntuColors.red
+
+            }
+            Button{
+                text: 'Cancel'
+                onClicked: PopupUtils.close(deleteConfirm)
+            }
         }
     }
 }

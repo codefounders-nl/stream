@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
+import Ubuntu.Components.Popups 1.3
 import Account 1.0
 
 ListItem {
@@ -16,8 +17,11 @@ ListItem {
                             Action {
                                 iconName: "delete"
                                 onTriggered: {
+                                    //deleteDialog.ffonhouden
+                                    deleteConfirm.accountToDelete = accountName
+                                    PopupUtils.open(deleteDialog)
                                     console.debug("About to delete account:", accountName)
-                                    AccountModel.remove(accountName)
+                                   // AccountModel.remove(accountName)
                                 }
                             }
                         ]
