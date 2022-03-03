@@ -11,11 +11,12 @@ ListItem {
     signal settingSelected(string settingName, string settingType)
 
     leadingActions: ListItemActions {
-                        id: listItemActions
+                        id: leadingActions
 
                         actions: [
                             Action {
                                 iconName: "delete"
+                                text: "Delete account"
                                 onTriggered: {
                                     accountsPage.accountToDelete = accountName
                                     PopupUtils.open(deleteDialog)
@@ -24,6 +25,20 @@ ListItem {
                             }
                         ]
                     }
+    
+    trailingActions: ListItemActions {
+                        id: trailingActions
+
+                        actions: [
+                            Action {
+                                iconName: "edit"
+                                text: "Edit account details"
+                                onTriggered: {
+                                    mainStack.push(Qt.resolvedUrl("pages/SubsonicLoginPage.qml"))
+                                }
+                            }
+                        ]
+                     }
  
 
 
