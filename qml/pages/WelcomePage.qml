@@ -87,20 +87,5 @@ PageBase {
                 onClicked: mainStack.push( Qt.resolvedUrl("SubsonicLoginPage.qml"))
             }
         }
-
-        Image {
-            id: spotifyIcon
-
-            height: units.gu(8)
-            width: units.gu(8)
-
-            source: Qt.resolvedUrl("../icons/spotify.png")
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: {}
-            }
-        }
     }
 }

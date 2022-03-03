@@ -106,6 +106,17 @@ PageBase {
                 value: player.position
 
                 // live: false // false to let slider be updated
+
+                Connections {
+                    target: player
+                    onPositionChanged: {
+                        slider.value = player.position
+                    }
+                    onStopped: {
+                        slider.value = 0.00
+                    }
+                }
+
             }
 
             Item {

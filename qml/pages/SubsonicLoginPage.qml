@@ -15,9 +15,15 @@ PageBase {
     Component.onCompleted: {
         accountNameField.text = provider.settings.category
         accountNameField.enabled = provider.settings.category == ""
-        serverurlField.text = provider.settings.serverurl
-        usernameField.text = provider.settings.username
-        passwordField.text = provider.settings.password
+        if (provider.settings.category == "") {
+            serverurlField.text = ""
+            usernameField.text = ""
+            passwordField.text = ""  
+        } else {
+            serverurlField.text = provider.settings.serverurl
+            usernameField.text = provider.settings.username
+            passwordField.text = provider.settings.password
+        }
     }
 
     Image {
