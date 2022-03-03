@@ -33,7 +33,6 @@ public:
 
     enum Type {
         Subsonic,
-        Spotify,
         Deezer,
         Youtube
     };

@@ -60,8 +60,7 @@ void Account::setType(const QString &typeStr)
 
 Account::Type Account::typeFromString(const QString &type)
 {
-    if (type == "Spotify") return Account::Type::Spotify;
-    else if (type == "Deezer") return Account::Type::Deezer;
+    if (type == "Deezer") return Account::Type::Deezer;
     else if (type == "Youtube") return Account::Type::Youtube;
     else return Account::Type::Subsonic;
 }
@@ -71,8 +70,6 @@ QString Account::typeToString(Account::Type type) const
     switch (type) {
         case Account::Type::Subsonic:
             return "Subsonic";
-        case Account::Type::Spotify:
-            return "Spotify";
         case Account::Type::Deezer:
             return "Deezer";
         case Account::Type::Youtube:

@@ -20,7 +20,6 @@
         <file>pages/WelcomePage.qml</file>
         <file>icons/stream.svg</file>
         <file>icons/subsonic.png</file>
-        <file>icons/spotify.png</file>
         <file>utility.js</file>
     </qresource>
 </RCC>
