@@ -41,6 +41,11 @@ PageBase {
  
             delegate: SettingsItem {
                         onSettingSelected: {
+                            playerPage.player.source = ""
+                            playerPage.title = ""
+                            playerPage.artist = ""
+                            playerPage.albumart = ""
+                            
                             console.debug("settingType:",settingType, "; settingName:", settingName)
                             generalSettings.currentAccount = settingName;
                             mainStack.clear()
@@ -81,6 +86,11 @@ PageBase {
                 text: 'Delete Account'
                 color: UbuntuColors.red
                 onClicked: {
+                    playerPage.player.source = ""
+                    playerPage.title = ""
+                    playerPage.artist = ""
+                    playerPage.albumart = ""
+
                     AccountModel.remove(accountToDelete)
                     PopupUtils.close(deleteConfirm)
                     if(AccountModel.get(0) == null){
