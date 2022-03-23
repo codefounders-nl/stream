@@ -108,9 +108,43 @@ PageBase {
             width: homePageTabView.width
             height: homePageTabView.height
 
-            Label{
-                text: 'Podcasts'
+            ListView {
+                id: tabPodCastListView
+                
+                anchors {
+                    fill: parent
+                }
+                
+                model: streamingProvider.podcastsModel
+                delegate: PlaylistsItem {
+                    id: playListsItem
+
+                    client: streamingProvider.client
+                    onPlaylistSelected: {
+                        streamingProvider.client.currentPlaylistId = playlistId
+                        pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {
+                                playlistTitle: playlistTitle,
+                                provider: streamingProvider
+                            })
+                    }         
+                }
+
+/*                delegate: PlaylistsItem {
+                    id: podCastsItem
+
+                    client: streamingProvider.client
+                    onPodCastSelected: {
+                        streamingProvider.client.currentPodCastId = podcaststId
+                        pageStack.push(Qt.resolvedUrl("PodCastPage.qml"), {
+                                podcastTitle: podcaststTitle,
+                                provider: streamingProvider
+                            })
+                    }         
+                }
+*/
+                clip: true
             }
+
         }
     }
 
