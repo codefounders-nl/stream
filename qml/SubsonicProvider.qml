@@ -7,6 +7,7 @@ Item {
     property alias settings: _settings
     property alias playlistModel: _playlistModel
     property alias playlistsModel: _playlistsModel
+    property alias podcastsModel: _podcastsModel
 
     Settings {
         id: _settings
@@ -42,5 +43,11 @@ Item {
         id: _playlistsModel
 
         source: _client.getPlaylists()
+    }
+
+    SubsonicPodcastsModel{
+        id: _podcastsModel
+
+        source: _client.getPodcasts()
     }
 }

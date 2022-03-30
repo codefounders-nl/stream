@@ -2,6 +2,7 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import "utility.js" as Utility
 
+// Listitem containing a playlist
 ListItem {
     id: playlistItem
 

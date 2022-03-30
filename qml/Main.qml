@@ -36,8 +36,7 @@ MainView {
     height: units.gu(75)
 
     Component.onCompleted: {
-        mainStack.push( Qt.resolvedUrl("pages/PodcastPage.qml"))
-     /*   
+        // mainStack.push( Qt.resolvedUrl("pages/PodcastPage.qml"))
         if (provider.settings.needsCredentials())
             mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"))
         else
@@ -45,7 +44,6 @@ MainView {
                                 streamingProvider:  provider,
                                 pageStack: mainStack
                             })
-    */
     }
     PageStack {
         id: mainStack

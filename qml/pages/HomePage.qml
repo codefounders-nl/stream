@@ -116,32 +116,32 @@ PageBase {
                 }
                 
                 model: streamingProvider.podcastsModel
-                delegate: PlaylistsItem {
-                    id: playListsItem
+                // delegate: PlaylistsItem {
+                //     id: playListsItem
 
-                    client: streamingProvider.client
-                    onPlaylistSelected: {
-                        streamingProvider.client.currentPlaylistId = playlistId
-                        pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {
-                                playlistTitle: playlistTitle,
-                                provider: streamingProvider
-                            })
-                    }         
-                }
+                //     client: streamingProvider.client
+                //     onPlaylistSelected: {
+                //         streamingProvider.client.currentPlaylistId = playlistId
+                //         pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {
+                //                 playlistTitle: playlistTitle,
+                //                 provider: streamingProvider
+                //             })
+                //     }         
+                // }
 
-/*                delegate: PlaylistsItem {
+                delegate: PodcastsItem {
                     id: podCastsItem
 
                     client: streamingProvider.client
-                    onPodCastSelected: {
-                        streamingProvider.client.currentPodCastId = podcaststId
-                        pageStack.push(Qt.resolvedUrl("PodCastPage.qml"), {
-                                podcastTitle: podcaststTitle,
-                                provider: streamingProvider
-                            })
-                    }         
+                    // onPodcastSelected: {
+                    //     streamingProvider.client.currentPodCastId = podcaststId
+                    //     pageStack.push(Qt.resolvedUrl("PodCastPage.qml"), {
+                    //             podcastTitle: podcaststTitle,
+                    //             provider: streamingProvider
+                    //         })
+                    // }         
                 }
-*/
+
                 clip: true
             }
 

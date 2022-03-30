@@ -22,14 +22,33 @@ Item {
         return getUrl("stream", id)
     }
 
-    function getUrl(operation, id) {
-        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password + "&id=" + id
-        //console.debug("url: " + url)
+    function getBaseUrl(operation, id) {
+        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
+        // console.debug("url: " + url)
         return url
     }
 
+    function getUrl(operation, id) {
+        var url = getBaseUrl(operation, id) + "&id=" + id
+        return url
+    }
+
+    function getPodcastUrl(operation, id) {
+        var url = getBaseUrl(operation, id)
+        return url
+    }
+
+
     function getPlaylists() {
         return getUrl("getPlaylists")
+    }
+    
+    function getPodcasts() {
+        return getPodcastUrl("getPodcasts")
+    }
+
+    function getPodcast(id) {
+        return getUrl("getPodcasts", id)
     }
 
     function login(serverurl,username,password,callbackFunc) {
