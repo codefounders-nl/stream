@@ -7,12 +7,12 @@ ListItem {
     id: podcastItem
 
     height: units.gu(9)
-    enabled: duration > 0
+    //enabled: duration > 0
     
     property var client
-    signal podcastSelected(string podcastId, string podcastTitle)
+    signal podcastSelected(string podcastId, string podcastTitle, string podcastDescription)
 
-    onClicked: podcastSelected(podcastId, title)
+    onClicked: podcastSelected(podcastId, title, description)
 
     UbuntuShape {
         id: podcastArtShape

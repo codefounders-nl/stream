@@ -133,13 +133,14 @@ PageBase {
                     id: podCastsItem
 
                     client: streamingProvider.client
-                    // onPodcastSelected: {
-                    //     streamingProvider.client.currentPodCastId = podcaststId
-                    //     pageStack.push(Qt.resolvedUrl("PodCastPage.qml"), {
-                    //             podcastTitle: podcaststTitle,
-                    //             provider: streamingProvider
-                    //         })
-                    // }         
+                    onPodcastSelected: {
+                        streamingProvider.client.currentPodcastId = podcastId
+                        pageStack.push(Qt.resolvedUrl("PodcastPage.qml"), {
+                                title: podcastTitle,
+                                description: podcastDescription,
+                                provider: streamingProvider
+                            })
+                    }         
                 }
 
                 clip: true

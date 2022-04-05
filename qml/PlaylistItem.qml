@@ -6,7 +6,8 @@ import "utility.js" as Utility
 ListItem {
     id: playlistItem
 
-    height: units.gu(9)
+    visible: duration > 0
+    height: visible ? units.gu(9) : 0
     
     property var client
     signal songSelected(string artist, string title, string albumart, string source)

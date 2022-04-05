@@ -8,6 +8,7 @@ Item {
     property alias playlistModel: _playlistModel
     property alias playlistsModel: _playlistsModel
     property alias podcastsModel: _podcastsModel
+    property alias podcastModel: _podcastModel
 
     Settings {
         id: _settings
@@ -24,7 +25,6 @@ Item {
         }
     }
 
-
     SubsonicClient{
         id: _client
 
@@ -39,15 +39,21 @@ Item {
         source: _client.getPlaylist(client.currentPlaylistId)
     }
 
-    SubsonicPlaylistsModel{
+    SubsonicPlaylistsModel {
         id: _playlistsModel
 
         source: _client.getPlaylists()
     }
 
-    SubsonicPodcastsModel{
+    SubsonicPodcastsModel {
         id: _podcastsModel
 
         source: _client.getPodcasts()
+    }
+
+    SubsonicPodcastModel {
+        id: _podcastModel
+
+        source: _client.getPodcast(client.currentPodcastId)
     }
 }

@@ -11,7 +11,7 @@ XmlListModel {
     XmlRole { name: "podcastTitle"; query: "@album/string()" }
     XmlRole { name: "albumart"; query: "@coverArt/string()" }
     XmlRole { name: "duration"; query: "@duration/string()" }
-    XmlRole { name: "source"; query: "@id/string()" }
+    XmlRole { name: "source"; query: "@streamId/string()" }
     // XmlRole { name: "year"; query: "@year/string()" }
     // XmlRole { name: "contentType"; query: "@contentType/string()" }
     XmlRole { name: "playCount"; query: "@playCount/string()" }
