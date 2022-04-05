@@ -9,6 +9,7 @@
         <file>SubsonicClient.qml</file>
         <file>SubsonicPlaylistModel.qml</file>
         <file>SubsonicPlaylistsModel.qml</file>
+        <file>SubsonicPodcastModel.qml</file>
         <file>SubsonicPodcastsModel.qml</file>
         <file>SubsonicProvider.qml</file>
         <file>pages/AccountsPage.qml</file>

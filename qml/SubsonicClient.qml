@@ -9,6 +9,7 @@ Item {
     property string currentPlaylistId
     property string currentAlbumId
     property string currentArtistId
+    property string currentPodcastId
 
     function getPlaylist(id) {
         return getUrl("getPlaylist", id)
@@ -22,29 +23,23 @@ Item {
         return getUrl("stream", id)
     }
 
-    function getBaseUrl(operation, id) {
+    function getBaseUrl(operation) {
         var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
-        // console.debug("url: " + url)
         return url
     }
 
     function getUrl(operation, id) {
-        var url = getBaseUrl(operation, id) + "&id=" + id
+        var url = getBaseUrl(operation) + (id == null ? "" : "&id=" + id)
+        console.debug("url: " + url)
         return url
     }
-
-    function getPodcastUrl(operation, id) {
-        var url = getBaseUrl(operation, id)
-        return url
-    }
-
 
     function getPlaylists() {
         return getUrl("getPlaylists")
     }
     
     function getPodcasts() {
-        return getPodcastUrl("getPodcasts")
+        return getUrl("getPodcasts") + "&includeEpisodes=false"
     }
 
     function getPodcast(id) {

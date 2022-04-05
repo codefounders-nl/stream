@@ -7,12 +7,13 @@ import ".."
 PageBase {
     id: podcastPage
 
-    property string podcastTitle 
+    property string title 
+    property alias description : podcastDescription.text
     property var provider
 
     anchors.fill: parent
 
-    pageHeader.title: podcastTitle
+    pageHeader.title: title
 
     Item {
         id: podcastDescriptionItem
@@ -31,7 +32,7 @@ PageBase {
             width: parent.width - units.gu(4)
             anchors.centerIn: parent
 
-            text: "Halo ik momet dit typen van Sander en hi  moet nog langer ook "
+            text: description
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
         }
