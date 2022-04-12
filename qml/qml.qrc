@@ -25,5 +25,6 @@
         <file>icons/stream.svg</file>
         <file>icons/subsonic.png</file>
         <file>utility.js</file>
+        <file>md5.js</file>
     </qresource>
 </RCC>
