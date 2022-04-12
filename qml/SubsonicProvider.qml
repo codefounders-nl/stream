@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import Qt.labs.settings 1.0
+import "utility.js" as Util
 
 Item {
     property string name: "Subsonic"
@@ -30,7 +31,8 @@ Item {
 
         server: _settings.serverurl
         username: _settings.username
-        password: _settings.password
+        salt: Util.generateRandomSalt(12)
+        token: Util.getToken(_settings.password, salt)
     }
 
     SubsonicPlaylistModel {

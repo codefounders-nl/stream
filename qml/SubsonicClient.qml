@@ -1,10 +1,13 @@
 import QtQuick 2.7
 import QtQuick.XmlListModel 2.0
+import "utility.js" as Util
 
 Item {
     property string server
     property string username
-    property string password
+    //property string password
+    property string salt
+    property string token
 
     property string currentPlaylistId
     property string currentAlbumId
@@ -24,7 +27,7 @@ Item {
     }
 
     function getBaseUrl(operation) {
-        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
+        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t="+ token
         return url
     }
 
@@ -48,7 +51,9 @@ Item {
 
     function login(serverurl,username,password,callbackFunc) {
         pingModel.callbackFunc = callbackFunc
-        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
+        salt = Util.generateRandomSalt(12)
+        token = Util.getToken(password,salt)
+        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t=" + token
     }
 
     XmlListModel {

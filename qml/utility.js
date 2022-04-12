@@ -13,7 +13,7 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
   
-function randomSalt(length) {
+function generateRandomSalt(length) {
     var min = Math.pow(2,32);
     var max = Math.pow(2,33)-1;
     console.log("length:", length,"min:", min, "max:", max);
