@@ -60,7 +60,7 @@ PageBase {
         }
 
         model: provider.podcastModel
-        delegate: PlaylistItem {
+        delegate: PodcastItem {
                     client: provider.client
                     onSongSelected: {
                         playerPage.title = title

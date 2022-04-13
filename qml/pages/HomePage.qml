@@ -17,6 +17,8 @@ PageBase {
 
         extension: Sections {
             id: homePageHeaderSections
+            selectedIndex: generalSettings.sectionIndex
+
             actions: [ 
                 Action {
                     text: 'Playlists'
@@ -32,7 +34,10 @@ PageBase {
                 }
             ]
 
-            onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
+            onSelectedIndexChanged: {
+                generalSettings.sectionIndex = selectedIndex
+                homePageTabView.currentIndex = selectedIndex
+            } 
         }
 
         trailingActionBar {
