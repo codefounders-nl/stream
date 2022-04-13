@@ -20,6 +20,7 @@ MainView {
         category: "General"
         property bool darkMode: false
         property string currentAccount
+        property int sectionIndex
 
         onDarkModeChanged: Theme.name = darkMode ? "Ubuntu.Components.Themes.SuruDark" : "Ubuntu.Components.Themes.Ambiance"
         onCurrentAccountChanged: provider.settings.category = currentAccount

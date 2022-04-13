@@ -65,23 +65,29 @@ PageBase {
 
                 Label {
                     id: trackInfoTitle
+
+                    width: parent.width
                     
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.left: parent.left
                                         
                     font.bold: true
                     maximumLineCount: 1
                     elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
                     
                     text: title
                 }
 
                 Label {
                     id: trackInfoArtist
-                    
-                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    width: parent.width
+
+                    anchors.left: parent.left
 
                     maximumLineCount: 1
                     elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
 
                     text: artist
                 }
