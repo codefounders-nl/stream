@@ -1,8 +1,9 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
-import QtMultimedia 5.4
+import QtMultimedia 5.6
 import "../utility.js" as Utility
+
 
 PageBase {
     id: playerPage
@@ -15,6 +16,7 @@ PageBase {
     property string artist
     property string albumart
     property alias player: player
+    property var model
 
     pageHeader.title: i18n.tr('Now playing')
 
@@ -22,8 +24,28 @@ PageBase {
         id: player
 
         autoPlay: true
+
+        playlist: Playlist {
+            id: playlist
+
+            onCurrentIndexChanged: {
+                playerPage.title = model.get(currentIndex).title
+                playerPage.artist = model.get(currentIndex).artist
+                playerPage.albumart = provider.client.getCoverArt(model.get(currentIndex).albumart)
+                
+            }
+
+        }
+        function addSources(sources, index){
+            player.stop()
+            playlist.clear()
+            playlist.addItems(sources);
+            playlist.currentIndex = index;
+        }
     }
     
+
+
     Image {
         id: fullAlbumArt
 
@@ -207,16 +229,29 @@ PageBase {
                         name: player.playbackState == true ? "media-playback-pause" : "media-playback-start"
                     }
                 }
-
-                Icon {
-                    id: nextButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-skip-forward"
+                    onClicked: {
+                        playlist.next()
+
+                    }
+
+                    Icon {
+                        id: nextButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+
+                        anchors.centerIn: parent
+
+                        name: "media-skip-forward"
+                    }
+
+
                 }
 
                 Icon {

@@ -37,23 +37,47 @@ Item {
         id: _playlistModel
 
         source: _client.getPlaylist(client.currentPlaylistId)
+
+
+        function toSourcesArray(){
+            var sourceArray = new Array(_playlistModel.count);
+            for(var i = 0; i < _playlistModel.count ; i++){
+                sourceArray[i] = client.getStreamSource(_playlistModel.get(i).source);
+            }
+            console.log(sourceArray);
+            return sourceArray;
+
+        }
     }
 
     SubsonicPlaylistsModel {
         id: _playlistsModel
 
         source: _client.getPlaylists()
+
+
     }
 
     SubsonicPodcastsModel {
         id: _podcastsModel
 
         source: _client.getPodcasts()
+
+        
     }
 
     SubsonicPodcastModel {
         id: _podcastModel
 
         source: _client.getPodcast(client.currentPodcastId)
+
+       function toSourcesArray(){
+            var sourceArray = new Array(_podcastModel.count);
+            for(var i = 0; i < _podcastModel.count ; i++){
+                sourceArray[i] = client.getStreamSource(_podcastModel.get( _podcastModel.count-i).source);
+            }
+            console.log(sourceArray);
+            return sourceArray;
+        }
     }
 }

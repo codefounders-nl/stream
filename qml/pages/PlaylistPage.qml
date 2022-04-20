@@ -24,12 +24,15 @@ PageBase {
 
         model: provider.playlistModel
         delegate: PlaylistItem {
+
                     client: provider.client
                     onSongSelected: {
+                        playerPage.model = provider.playlistModel
                         playerPage.title = title
                         playerPage.artist = artist
                         playerPage.albumart = albumart
-                        playerPage.player.source = source
+                        //playerPage.player.source = source
+                        playerPage.player.addSources(  provider.playlistModel.toSourcesArray(), index )
                     }
                 }
         clip: true

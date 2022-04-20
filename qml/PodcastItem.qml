@@ -12,7 +12,7 @@ ListItem {
     property var client
     signal songSelected(string artist, string title, string albumart, string source)
 
-    onClicked: songSelected(artist, podcastTitle, client.getCoverArt(albumart), client.getStreamSource(source))
+    onClicked: songSelected(artist, title, client.getCoverArt(albumart), client.getStreamSource(source))
 
     UbuntuShape {
         id: albumartShape
@@ -62,7 +62,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: podcastTitle
+            text: title
         }
 
         Label {
