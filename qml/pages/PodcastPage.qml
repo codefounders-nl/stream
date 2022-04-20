@@ -63,10 +63,12 @@ PageBase {
         delegate: PodcastItem {
                     client: provider.client
                     onSongSelected: {
-                        playerPage.title = title
+                        playerPage.model = provider.podcastModel
+                        playerPage.title = title   
                         playerPage.artist = artist
                         playerPage.albumart = albumart
-                        playerPage.player.source = source
+                       // playerPage.player.source = source
+                        playerPage.player.addSources(provider.podcastModel.toSourcesArray(), index)
                     }
                 }
         clip: true
