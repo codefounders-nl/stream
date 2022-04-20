@@ -76,7 +76,9 @@ Item {
        function toSourcesArray(){
             var sourceArray = new Array(_podcastModel.count);
             for(var i = 0; i < _podcastModel.count ; i++){
-                sourceArray[i] = client.getStreamSource(_podcastModel.get( _podcastModel.count-i).source);
+                console.log( i )
+                console.log(_podcastModel.count - (i + 1));
+                sourceArray[i] = client.getStreamSource(_podcastModel.get( _podcastModel.count - (i + 1)).source);
             }
             console.log(sourceArray);
             return sourceArray;
