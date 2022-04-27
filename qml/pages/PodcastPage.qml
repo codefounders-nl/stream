@@ -67,6 +67,7 @@ PageBase {
                         playerPage.title = title   
                         playerPage.artist = artist
                         playerPage.albumart = albumart
+                        playerPage.reverse = true
                        // playerPage.player.source = source
                         playerPage.player.addSources(provider.podcastModel.toSourcesArray(), index)
                     }
