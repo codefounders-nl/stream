@@ -73,15 +73,14 @@ Item {
 
         source: _client.getPodcast(client.currentPodcastId)
 
-       function toSourcesArray(){
+        function toSourcesArray(){
             var sourceArray = new Array(_podcastModel.count);
             for(var i = 0; i < _podcastModel.count ; i++){
-                console.log( i )
-                console.log(_podcastModel.count - (i + 1));
-                sourceArray[i] = client.getStreamSource(_podcastModel.get( _podcastModel.count - (i + 1)).source);
+                sourceArray[i] = client.getStreamSource(_podcastModel.get(i).source);
             }
             console.log(sourceArray);
             return sourceArray;
+
         }
     }
 }

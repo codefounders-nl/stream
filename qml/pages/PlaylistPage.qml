@@ -31,6 +31,7 @@ PageBase {
                         playerPage.title = title
                         playerPage.artist = artist
                         playerPage.albumart = albumart
+                        playerPage.reverse = false
                         //playerPage.player.source = source
                         playerPage.player.addSources(  provider.playlistModel.toSourcesArray(), index )
                     }

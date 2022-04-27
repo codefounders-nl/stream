@@ -17,6 +17,7 @@ PageBase {
     property string albumart
     property alias player: player
     property var model
+    property bool reverse
 
     pageHeader.title: i18n.tr('Now playing')
 
@@ -191,16 +192,33 @@ PageBase {
 
                     name: "media-playlist-repeat"
                 }
-                
-                Icon {
-                    id: previousButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
+                    enabled: previousButton.enabled
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-skip-backward"
+                    onClicked: {
+                        if(reverse){
+                            playlist.next()
+                        }else{
+                            playlist.previous()
+                        }
+                    }
+                    
+                    Icon {
+                        id: previousButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+                        enabled: reverse ? playlist.currentIndex < playlist.itemCount - 1 : playlist.currentIndex > 0
+                        color: enabled ? theme.palette.normal.baseText : theme.palette.disabled.baseText
+
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        name: "media-skip-backward"
+                    }
                 }
 
                 MouseArea {
@@ -208,6 +226,7 @@ PageBase {
                     width: units.gu(5)
 
                     anchors.verticalCenter: parent.verticalCenter
+                    
 
                     onClicked: {
                         if (player.playbackState == true) {
@@ -223,7 +242,7 @@ PageBase {
 
                         height: units.gu(5)
                         width: units.gu(5)
-
+                        color: theme.palette.normal.baseText
                         anchors.centerIn: parent
 
                         name: player.playbackState == true ? "media-playback-pause" : "media-playback-start"
@@ -232,11 +251,16 @@ PageBase {
                 MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
+                    enabled: nextButton.enabled
 
                     anchors.verticalCenter: parent.verticalCenter  
 
                     onClicked: {
-                        playlist.next()
+                        if(reverse){
+                            playlist.previous()
+                        }else{
+                            playlist.next()
+                        }
 
                     }
 
@@ -245,7 +269,8 @@ PageBase {
 
                         height: units.gu(3)
                         width: units.gu(3)
-
+                         enabled: !reverse ? playlist.currentIndex < playlist.itemCount - 1 : playlist.currentIndex > 0           
+                        color: enabled ? theme.palette.normal.baseText : theme.palette.disabled.baseText
                         anchors.centerIn: parent
 
                         name: "media-skip-forward"
