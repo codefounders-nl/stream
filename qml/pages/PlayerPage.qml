@@ -26,6 +26,13 @@ PageBase {
 
         autoPlay: true
 
+        onStopped: {
+            if (playlist.currentIndex == -1) {
+                playlist.currentIndex = 0
+                player.pause()
+            }
+        }
+
         playlist: Playlist {
             id: playlist
 
@@ -182,16 +189,46 @@ PageBase {
 
                 spacing: units.gu(3)
 
-                Icon {
-                    id: repeatButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-playlist-repeat"
+                    onClicked: {
+                        // 1 == CurrentItemInLoop => Sequential
+                        if (playlist.playbackMode == 1) {
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 2
+                        // 2 == Sequential || 4 == Random => Loop
+                        } else if (playlist.playbackMode == 2 || playlist.playbackMode == 4) {
+                            // set disabled color for shuffle button
+                            shuffleButton.color = theme.palette.disabled.baseText
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.normal.baseText
+                            playlist.playbackMode = 3
+                        // 3 == Loop => CurrentItemInLoop
+                        } else if (playlist.playbackMode == 3) {
+                            repeatButton.name = "media-playlist-repeat-one"
+                            repeatButton.color = theme.palette.normal.baseText
+                            playlist.playbackMode = 1
+                        }
+                    }
+
+                    Icon {
+                        id: repeatButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: theme.palette.disabled.baseText
+
+                        name: "media-playlist-repeat"
+                    }
                 }
+
                 MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
@@ -279,15 +316,37 @@ PageBase {
 
                 }
 
-                Icon {
-                    id: shuffleButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-playlist-shuffle"
+                    onClicked: {
+                        // 4 == Random => Sequential
+                        if (playlist.playbackMode == 4) {
+                            shuffleButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 2
+                        } else {
+                            // set disabled color for shuffle button
+                            shuffleButton.color = theme.palette.normal.baseText
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 4
+                        }
+                    }
+
+                    Icon {
+                        id: shuffleButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: theme.palette.disabled.baseText
+
+                        name: "media-playlist-shuffle"
+                    }
                 }
             }
         }
