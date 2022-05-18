@@ -12,5 +12,6 @@ XmlListModel {
     XmlRole { name: "albumart"; query: "@coverArt/string()" }
     XmlRole { name: "duration"; query: "@duration/string()" }
     XmlRole { name: "source"; query: "@id/string()" }
+    XmlRole { name: "starred"; query: "@starred/string()" }
 
 }

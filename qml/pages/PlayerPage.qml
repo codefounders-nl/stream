@@ -15,11 +15,22 @@ PageBase {
     property string title
     property string artist
     property string albumart
+    property string starred
+    property string id
     property alias player: player
     property var model
     property bool reverse
 
     pageHeader.title: i18n.tr('Now playing')
+    pageHeader.trailingActionBar.actions: [
+                Action {
+                    iconName: starred ? "starred" : "non-starred"
+                    text: starred ? "Star" : "Unstar"
+                    onTriggered: starred ? provider.client.unstar(id) : provider.client.star(id)
+                }
+            ]
+
+
 
     Audio {
         id: player
@@ -40,7 +51,8 @@ PageBase {
                 playerPage.title = model.get(currentIndex).title
                 playerPage.artist = model.get(currentIndex).artist
                 playerPage.albumart = provider.client.getCoverArt(model.get(currentIndex).albumart)
-                
+                playerPage.starred = model.get(currentIndex).starred
+                playerPage.id = model.get(currentIndex).source
             }
 
         }
