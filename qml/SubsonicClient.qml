@@ -18,6 +18,19 @@ Item {
         return getUrl("getPlaylist", id)
     }
 
+    function star(songid) {
+        callApi(getUrl("star", songid))
+    }
+
+    function unstar(songid) {
+        callApi(getUrl("unstar", songid))
+    }
+
+    function callApi(url, callbackFunc) {
+        pingModel.callbackFunc = callbackFunc
+        pingModel.source = url
+    }
+
     function getCoverArt(id) {
         return getUrl("getCoverArt", id)
     }
@@ -65,7 +78,7 @@ Item {
             console.log(pingModel.source)
             console.log(pingModel.status)
             console.log(pingModel.get(0))
-            if (status == XmlListModel.Ready) {
+            if (status == XmlListModel.Ready && callbackFunc) {
                 callbackFunc(pingModel.get(0))
             }
         }
