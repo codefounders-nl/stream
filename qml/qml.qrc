@@ -24,7 +24,6 @@
         <file>pages/SubsonicLoginPage.qml</file>
         <file>pages/WelcomePage.qml</file>
         <file>icons/stream.svg</file>
-        <file>icons/subsonic.png</file>
         <file>utility.js</file>
         <file>md5.js</file>
     </qresource>
