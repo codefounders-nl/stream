@@ -39,7 +39,7 @@ MainView {
     Component.onCompleted: {
         // mainStack.push( Qt.resolvedUrl("pages/PodcastPage.qml"))
         if (provider.settings.needsCredentials())
-            mainStack.push( Qt.resolvedUrl("pages/WelcomePage.qml"))
+            mainStack.push( Qt.resolvedUrl("pages/SubsonicLoginPage.qml"))
         else
             mainStack.push( Qt.resolvedUrl("pages/HomePage.qml"), {
                                 streamingProvider:  provider,

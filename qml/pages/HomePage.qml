@@ -24,10 +24,7 @@ PageBase {
                     text: 'Playlists'
                 },
                 Action {
-                    text: 'Artists'
-                },
-                Action {
-                    text: 'Albums'
+                    text: 'Starred'
                 },
                 Action {
                     text: 'Podcasts'
@@ -86,24 +83,33 @@ PageBase {
         }
 
         Item{
-            id: tabArtists
+            id: tabStarred
 
             width: homePageTabView.width
             height: homePageTabView.height
 
-            Label{
-                text: 'Artists'
-            }
-        }
+            ListView {
+                id: listview
 
-        Item{
-            id: tabAlbums
+                anchors {
+                    fill: parent
+                }
 
-            width: homePageTabView.width
-            height: homePageTabView.height
+                model: provider.starredModel
+                delegate: PlaylistItem {
 
-            Label{
-                text: 'Albums'
+                            client: provider.client
+                            onSongSelected: {
+                                playerPage.model = provider.starredModel
+                                playerPage.title = title
+                                playerPage.artist = artist
+                                playerPage.albumart = albumart
+                                playerPage.reverse = false
+                                //playerPage.player.source = source
+                                playerPage.player.addSources(  provider.starredModel.toSourcesArray(), index )
+                            }
+                        }
+                clip: true
             }
         }
 
@@ -169,6 +175,9 @@ PageBase {
         orientation: Qt.Horizontal
 
         snapMode: ListView.SnapOneItem
+
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        highlightMoveDuration: UbuntuAnimation.FastDuration
 
         onCurrentIndexChanged: homePageHeaderSections.selectedIndex = currentIndex
    }

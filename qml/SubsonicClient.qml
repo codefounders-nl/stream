@@ -15,12 +15,12 @@ Item {
         return getUrl("getPlaylist", id)
     }
 
-    function star(songid) {
-        callApi(getUrl("star", songid))
+    function star(songid,callbackFunc) {
+        callApi(getUrl("star", songid),callbackFunc)
     }
 
-    function unstar(songid) {
-        callApi(getUrl("unstar", songid))
+    function unstar(songid,callbackFunc) {
+        callApi(getUrl("unstar", songid),callbackFunc)
     }
 
     function callApi(url, callbackFunc) {
@@ -49,6 +49,10 @@ Item {
 
     function getPlaylists() {
         return getUrl("getPlaylists")
+    }
+
+    function getStarred() {
+        return getUrl("getStarred2")
     }
     
     function getPodcasts() {

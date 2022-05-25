@@ -9,6 +9,7 @@ Item {
     property alias playlistsModel: _playlistsModel
     property alias podcastsModel: _podcastsModel
     property alias podcastModel: _podcastModel
+    property alias starredModel: _starredModel
 
     Settings {
         id: _settings
@@ -56,6 +57,22 @@ Item {
         source: _client.getPlaylists()
 
 
+    }
+
+    SubsonicPlaylistModel {
+        id: _starredModel
+
+        source: _client.getStarred()
+
+        function toSourcesArray(){
+            var sourceArray = new Array(_starredModel.count);
+            for(var i = 0; i < _starredModel.count ; i++){
+                sourceArray[i] = client.getStreamSource(_starredModel.get(i).source);
+            }
+            console.log(sourceArray);
+            return sourceArray;
+
+        }
     }
 
     SubsonicPodcastsModel {

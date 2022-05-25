@@ -24,11 +24,20 @@ PageBase {
     pageHeader.title: i18n.tr('Now playing')
     pageHeader.trailingActionBar.actions: [
                 Action {
+                    visible: !reverse
                     iconName: starred ? "starred" : "non-starred"
                     text: starred ? "Star" : "Unstar"
-                    onTriggered: starred ? provider.client.unstar(id) : provider.client.star(id)
+                    onTriggered: starred ? provider.client.unstar(id,starredCheck) : provider.client.star(id,starredCheck)
                 }
             ]
+
+    function starredCheck(starredResult){
+        console.log(JSON.stringify(starredResult))
+
+        if (starredResult.status == "ok") {
+            starred = starred ? "" : new Date()
+        }
+    }
 
 
 
