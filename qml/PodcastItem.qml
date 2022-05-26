@@ -2,12 +2,12 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import "utility.js" as Utility
 
-// Listitem for an individual song of a playlist
+// Listitem for an individual song of a podcast
 ListItem {
-    id: playlistItem
+    id: podcastItem
 
     visible: duration > 0
-    height: visible ? units.gu(9) : 0
+    height: visible ? units.gu(16) : 0
     
     property var client
     signal songSelected(string artist, string title, string albumart, string source)
@@ -23,7 +23,8 @@ ListItem {
         anchors {
             left: parent.left
             leftMargin: units.gu(2)
-            verticalCenter: parent.verticalCenter
+            top: parent.top
+            topMargin: units.gu(2)
         }
 
         // Put album art in UbuntuShape
@@ -44,7 +45,7 @@ ListItem {
         anchors {
             left: albumartShape.right
             leftMargin: units.gu(1)
-            verticalCenter: parent.verticalCenter
+            verticalCenter: albumartShape.verticalCenter
         }
 
         Label {
@@ -77,7 +78,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: artist
+            text: publishDate.slice(0, 10)
         }
 
         Label {
@@ -90,5 +91,24 @@ ListItem {
 
             text: Utility.millisecToPlaytime(duration * 1000)
         }
+    }
+
+    Label {
+        id: descriptionText
+
+        width: parent.width - units.gu(4)
+
+        anchors {
+            left: parent.left
+            leftMargin: units.gu(2)
+            top: albumartShape.bottom
+            topMargin: units.gu(1)
+        }
+
+        maximumLineCount: 2
+        elide: Text.ElideRight // required the width to be set
+        wrapMode: Text.WordWrap
+
+        text: description
     }
 }

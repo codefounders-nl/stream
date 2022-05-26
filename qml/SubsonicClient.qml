@@ -1,17 +1,34 @@
 import QtQuick 2.7
 import QtQuick.XmlListModel 2.0
+import "utility.js" as Util
 
 Item {
     property string server
     property string username
-    property string password
+    //property string password
+    property string salt
+    property string token
 
     property string currentPlaylistId
     property string currentAlbumId
     property string currentArtistId
+    property string currentPodcastId
 
     function getPlaylist(id) {
         return getUrl("getPlaylist", id)
+    }
+
+    function star(songid,callbackFunc) {
+        callApi(getUrl("star", songid),callbackFunc)
+    }
+
+    function unstar(songid,callbackFunc) {
+        callApi(getUrl("unstar", songid),callbackFunc)
+    }
+
+    function callApi(url, callbackFunc) {
+        pingModel.callbackFunc = callbackFunc
+        pingModel.source = url
     }
 
     function getCoverArt(id) {
@@ -22,9 +39,14 @@ Item {
         return getUrl("stream", id)
     }
 
+    function getBaseUrl(operation) {
+        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t="+ token
+        return url
+    }
+
     function getUrl(operation, id) {
-        var url = server + "/rest/"+ operation + "?v=1.13&c=stream.sflt&u=" + username + "&p=" + password + "&id=" + id
-        //console.debug("url: " + url)
+        var url = getBaseUrl(operation) + (id == null ? "" : "&id=" + id)
+        console.debug("url: " + url)
         return url
     }
 
@@ -32,9 +54,23 @@ Item {
         return getUrl("getPlaylists")
     }
 
+    function getStarred() {
+        return getUrl("getStarred2")
+    }
+    
+    function getPodcasts() {
+        return getUrl("getPodcasts") + "&includeEpisodes=false"
+    }
+
+    function getPodcast(id) {
+        return getUrl("getPodcasts", id)
+    }
+
     function login(serverurl,username,password,callbackFunc) {
         pingModel.callbackFunc = callbackFunc
-        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&p=" + password
+        salt = Util.generateRandomSalt(12)
+        token = Util.getToken(password,salt)
+        pingModel.source = serverurl + "/rest/ping.view?v=1.13&c=stream.sflt&u=" + username + "&s=" + salt + "&t=" + token
     }
 
     XmlListModel {
@@ -46,7 +82,7 @@ Item {
             console.log(pingModel.source)
             console.log(pingModel.status)
             console.log(pingModel.get(0))
-            if (status == XmlListModel.Ready) {
+            if (status == XmlListModel.Ready && callbackFunc) {
                 callbackFunc(pingModel.get(0))
             }
         }

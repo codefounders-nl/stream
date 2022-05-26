@@ -4,10 +4,14 @@
         <file>Main.qml</file>
         <file>PlaylistItem.qml</file>
         <file>PlaylistsItem.qml</file>
+        <file>PodcastItem.qml</file>
+        <file>PodcastsItem.qml</file>
         <file>SettingsItem.qml</file>
         <file>SubsonicClient.qml</file>
         <file>SubsonicPlaylistModel.qml</file>
         <file>SubsonicPlaylistsModel.qml</file>
+        <file>SubsonicPodcastModel.qml</file>
+        <file>SubsonicPodcastsModel.qml</file>
         <file>SubsonicProvider.qml</file>
         <file>pages/AccountsPage.qml</file>
         <file>pages/AddAccountPage.qml</file>
@@ -15,11 +19,12 @@
         <file>pages/PageBase.qml</file>
         <file>pages/PlayerPage.qml</file>
         <file>pages/PlaylistPage.qml</file>
+        <file>pages/PodcastPage.qml</file>
         <file>pages/SettingsPage.qml</file>
         <file>pages/SubsonicLoginPage.qml</file>
         <file>pages/WelcomePage.qml</file>
         <file>icons/stream.svg</file>
-        <file>icons/subsonic.png</file>
         <file>utility.js</file>
+        <file>md5.js</file>
     </qresource>
 </RCC>

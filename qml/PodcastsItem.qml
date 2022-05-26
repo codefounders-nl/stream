@@ -2,20 +2,20 @@ import QtQuick 2.7
 import Ubuntu.Components 1.3
 import "utility.js" as Utility
 
-// Listitem containing a playlist
+// Listitem containing a podcast
 ListItem {
-    id: playlistItem
+    id: podcastItem
 
     height: units.gu(9)
-    enabled: duration > 0
+    //enabled: duration > 0
     
     property var client
-    signal playlistSelected(string playlistId, string playlistTitle)
+    signal podcastSelected(string podcastId, string podcastTitle, string podcastDescription)
 
-    onClicked: playlistSelected(playlistId, title)
+    onClicked: podcastSelected(podcastId, title, description)
 
     UbuntuShape {
-        id: playlistArtShape
+        id: podcastArtShape
 
         height: units.gu(7)
         width: height
@@ -28,9 +28,9 @@ ListItem {
 
         // Put album art in UbuntuShape
         source: Image {
-                    id: playlistImage
+                    id: podcastImage
 
-                    source: client.getCoverArt(playlistArt)                   
+                    source: client.getCoverArt(coverArt)                   
                 }
 
         aspect: UbuntuShape.Inset
@@ -42,7 +42,7 @@ ListItem {
         height: units.gu(4.5)
 
         anchors {
-            left: playlistArtShape.right
+            left: podcastArtShape.right
             leftMargin: units.gu(1)
             verticalCenter: parent.verticalCenter
         }
@@ -50,7 +50,7 @@ ListItem {
         Label {
             id: titleText
 
-            width: parent.width - playlistArtShape.width
+            width: parent.width - podcastArtShape.width
 
             anchors {
                 left: parent.left
@@ -67,7 +67,7 @@ ListItem {
         Label {
             id: informationText
 
-            width: parent.width - playlistArtShape.width
+            width: parent.width - podcastArtShape.width
 
             anchors {
                 left: parent.left
@@ -77,7 +77,7 @@ ListItem {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: tracksAmount + ' tracks, ' +  Utility.secToPlaytimeHourFormat(duration)
+            text: description
         }
     }
 }

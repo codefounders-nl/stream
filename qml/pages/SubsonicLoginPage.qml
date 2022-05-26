@@ -10,7 +10,7 @@ PageBase {
 
     showBottomMenu: false
 
-    pageHeader.title: "Subsonic"
+    pageHeader.title: "Stream"
 
     Component.onCompleted: {
         accountNameField.text = provider.settings.category
@@ -26,8 +26,8 @@ PageBase {
         }
     }
 
-    Image {
-        id: icon
+    UbuntuShape {
+        id: appIcon
 
         width: units.gu(15)
         height: units.gu(15)
@@ -38,7 +38,23 @@ PageBase {
             topMargin: units.gu(2)
         }
 
-        source: Qt.resolvedUrl("../icons/subsonic.png")
+        source: Image {
+                    source: Qt.resolvedUrl("../icons/stream.svg")
+                }
+    }
+
+    Label {
+        id: welcomeLabel
+
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: appIcon.bottom
+            topMargin: units.gu(2)
+        }
+
+        text: "Hi there!<br>Welcome to Stream"
+        textSize: Label.Large
+        horizontalAlignment: Text.AlignHCenter
     }
 
     Label {
@@ -48,8 +64,8 @@ PageBase {
 
         anchors {
             horizontalCenter: parent.horizontalCenter
-            top: icon.bottom
-            topMargin: units.gu(2)
+            top: welcomeLabel.bottom
+            topMargin: units.gu(1)
         }
 
         text: "Please enter your server URL, username and password, to login to SubSonic"

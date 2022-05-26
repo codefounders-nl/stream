@@ -17,22 +17,24 @@ PageBase {
 
         extension: Sections {
             id: homePageHeaderSections
+            selectedIndex: generalSettings.sectionIndex
+
             actions: [ 
                 Action {
                     text: 'Playlists'
                 },
                 Action {
-                    text: 'Artists'
-                },
-                Action {
-                    text: 'Albums'
+                    text: 'Starred'
                 },
                 Action {
                     text: 'Podcasts'
                 }
             ]
 
-            onSelectedIndexChanged: homePageTabView.currentIndex = selectedIndex
+            onSelectedIndexChanged: {
+                generalSettings.sectionIndex = selectedIndex
+                homePageTabView.currentIndex = selectedIndex
+            } 
         }
 
         trailingActionBar {
@@ -81,24 +83,33 @@ PageBase {
         }
 
         Item{
-            id: tabArtists
+            id: tabStarred
 
             width: homePageTabView.width
             height: homePageTabView.height
 
-            Label{
-                text: 'Artists'
-            }
-        }
+            ListView {
+                id: listview
 
-        Item{
-            id: tabAlbums
+                anchors {
+                    fill: parent
+                }
 
-            width: homePageTabView.width
-            height: homePageTabView.height
+                model: provider.starredModel
+                delegate: PlaylistItem {
 
-            Label{
-                text: 'Albums'
+                            client: provider.client
+                            onSongSelected: {
+                                playerPage.model = provider.starredModel
+                                playerPage.title = title
+                                playerPage.artist = artist
+                                playerPage.albumart = albumart
+                                playerPage.reverse = false
+                                //playerPage.player.source = source
+                                playerPage.player.addSources(  provider.starredModel.toSourcesArray(), index )
+                            }
+                        }
+                clip: true
             }
         }
 
@@ -108,9 +119,44 @@ PageBase {
             width: homePageTabView.width
             height: homePageTabView.height
 
-            Label{
-                text: 'Podcasts'
+            ListView {
+                id: tabPodCastListView
+                
+                anchors {
+                    fill: parent
+                }
+                
+                model: streamingProvider.podcastsModel
+                // delegate: PlaylistsItem {
+                //     id: playListsItem
+
+                //     client: streamingProvider.client
+                //     onPlaylistSelected: {
+                //         streamingProvider.client.currentPlaylistId = playlistId
+                //         pageStack.push(Qt.resolvedUrl("PlaylistPage.qml"), {
+                //                 playlistTitle: playlistTitle,
+                //                 provider: streamingProvider
+                //             })
+                //     }         
+                // }
+
+                delegate: PodcastsItem {
+                    id: podCastsItem
+
+                    client: streamingProvider.client
+                    onPodcastSelected: {
+                        streamingProvider.client.currentPodcastId = podcastId
+                        pageStack.push(Qt.resolvedUrl("PodcastPage.qml"), {
+                                title: podcastTitle,
+                                description: podcastDescription,
+                                provider: streamingProvider
+                            })
+                    }         
+                }
+
+                clip: true
             }
+
         }
     }
 
@@ -129,6 +175,9 @@ PageBase {
         orientation: Qt.Horizontal
 
         snapMode: ListView.SnapOneItem
+
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        highlightMoveDuration: UbuntuAnimation.FastDuration
 
         onCurrentIndexChanged: homePageHeaderSections.selectedIndex = currentIndex
    }

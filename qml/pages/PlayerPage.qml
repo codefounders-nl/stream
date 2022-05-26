@@ -1,8 +1,9 @@
 import QtQuick 2.7
 import Ubuntu.Components 1.3
 import QtQuick.Layouts 1.3
-import QtMultimedia 5.4
+import QtMultimedia 5.6
 import "../utility.js" as Utility
+
 
 PageBase {
     id: playerPage
@@ -14,16 +15,66 @@ PageBase {
     property string title
     property string artist
     property string albumart
+    property string starred
+    property string id
     property alias player: player
+    property var model
+    property bool reverse
 
     pageHeader.title: i18n.tr('Now playing')
+    pageHeader.trailingActionBar.actions: [
+                Action {
+                    visible: !reverse
+                    iconName: starred ? "starred" : "non-starred"
+                    text: starred ? "Star" : "Unstar"
+                    onTriggered: starred ? provider.client.unstar(id,starredCheck) : provider.client.star(id,starredCheck)
+                }
+            ]
+
+    function starredCheck(starredResult){
+        console.log(JSON.stringify(starredResult))
+
+        if (starredResult.status == "ok") {
+            starred = starred ? "" : new Date()
+        }
+    }
+
+
 
     Audio {
         id: player
 
         autoPlay: true
+
+        onStopped: {
+            if (playlist.currentIndex == -1) {
+                playlist.currentIndex = 0
+                player.pause()
+            }
+        }
+
+        playlist: Playlist {
+            id: playlist
+
+            onCurrentIndexChanged: {
+                playerPage.title = model.get(currentIndex).title
+                playerPage.artist = model.get(currentIndex).artist
+                playerPage.albumart = provider.client.getCoverArt(model.get(currentIndex).albumart)
+                playerPage.starred = model.get(currentIndex).starred
+                playerPage.id = model.get(currentIndex).source
+            }
+
+        }
+        function addSources(sources, index){
+            player.stop()
+            playlist.clear()
+            playlist.addItems(sources);
+            playlist.currentIndex = index;
+        }
     }
     
+
+
     Image {
         id: fullAlbumArt
 
@@ -65,23 +116,29 @@ PageBase {
 
                 Label {
                     id: trackInfoTitle
+
+                    width: parent.width
                     
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.left: parent.left
                                         
                     font.bold: true
                     maximumLineCount: 1
                     elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
                     
                     text: title
                 }
 
                 Label {
                     id: trackInfoArtist
-                    
-                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    width: parent.width
+
+                    anchors.left: parent.left
 
                     maximumLineCount: 1
                     elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
 
                     text: artist
                 }
@@ -153,26 +210,73 @@ PageBase {
 
                 spacing: units.gu(3)
 
-                Icon {
-                    id: repeatButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-playlist-repeat"
+                    onClicked: {
+                        // 1 == CurrentItemInLoop => Sequential
+                        if (playlist.playbackMode == 1) {
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 2
+                        // 2 == Sequential || 4 == Random => Loop
+                        } else if (playlist.playbackMode == 2 || playlist.playbackMode == 4) {
+                            // set disabled color for shuffle button
+                            shuffleButton.color = theme.palette.disabled.baseText
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.normal.baseText
+                            playlist.playbackMode = 3
+                        // 3 == Loop => CurrentItemInLoop
+                        } else if (playlist.playbackMode == 3) {
+                            repeatButton.name = "media-playlist-repeat-one"
+                            repeatButton.color = theme.palette.normal.baseText
+                            playlist.playbackMode = 1
+                        }
+                    }
+
+                    Icon {
+                        id: repeatButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: theme.palette.disabled.baseText
+
+                        name: "media-playlist-repeat"
+                    }
                 }
-                
-                Icon {
-                    id: previousButton
 
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
+                    enabled: previousButton.enabled
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-skip-backward"
+                    onClicked: {
+                        if(reverse){
+                            playlist.next()
+                        }else{
+                            playlist.previous()
+                        }
+                    }
+                    
+                    Icon {
+                        id: previousButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+                        enabled: reverse ? playlist.currentIndex < playlist.itemCount - 1 : playlist.currentIndex > 0
+                        color: enabled ? theme.palette.normal.baseText : theme.palette.disabled.baseText
+
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        name: "media-skip-backward"
+                    }
                 }
 
                 MouseArea {
@@ -180,6 +284,7 @@ PageBase {
                     width: units.gu(5)
 
                     anchors.verticalCenter: parent.verticalCenter
+                    
 
                     onClicked: {
                         if (player.playbackState == true) {
@@ -195,33 +300,74 @@ PageBase {
 
                         height: units.gu(5)
                         width: units.gu(5)
-
+                        color: theme.palette.normal.baseText
                         anchors.centerIn: parent
 
                         name: player.playbackState == true ? "media-playback-pause" : "media-playback-start"
                     }
                 }
-
-                Icon {
-                    id: nextButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
+                    enabled: nextButton.enabled
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-skip-forward"
+                    onClicked: {
+                        if(reverse){
+                            playlist.previous()
+                        }else{
+                            playlist.next()
+                        }
+
+                    }
+
+                    Icon {
+                        id: nextButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+                         enabled: !reverse ? playlist.currentIndex < playlist.itemCount - 1 : playlist.currentIndex > 0           
+                        color: enabled ? theme.palette.normal.baseText : theme.palette.disabled.baseText
+                        anchors.centerIn: parent
+
+                        name: "media-skip-forward"
+                    }
+
+
                 }
 
-                Icon {
-                    id: shuffleButton
-
+                MouseArea{
                     height: units.gu(3)
                     width: units.gu(3)
 
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter  
 
-                    name: "media-playlist-shuffle"
+                    onClicked: {
+                        // 4 == Random => Sequential
+                        if (playlist.playbackMode == 4) {
+                            shuffleButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 2
+                        } else {
+                            // set disabled color for shuffle button
+                            shuffleButton.color = theme.palette.normal.baseText
+                            repeatButton.name = "media-playlist-repeat"
+                            repeatButton.color = theme.palette.disabled.baseText
+                            playlist.playbackMode = 4
+                        }
+                    }
+
+                    Icon {
+                        id: shuffleButton
+
+                        height: units.gu(3)
+                        width: units.gu(3)
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: theme.palette.disabled.baseText
+
+                        name: "media-playlist-shuffle"
+                    }
                 }
             }
         }
