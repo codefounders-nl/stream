@@ -25,5 +25,6 @@
         <file>pages/WelcomePage.qml</file>
         <file>icons/stream.svg</file>
         <file>utility.js</file>
+        <file>md5.js</file>
     </qresource>
 </RCC>
